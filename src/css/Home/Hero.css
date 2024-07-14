@@ -1,0 +1,71 @@
+/* Hero.css */
+
+/* Estilo de los botones del Hero */
+.btn-about {
+  background-color: #0033a0; /* Azul chileno */
+  color: #fff;
+  transition: all 0.3s ease-in-out; /* Transición suave para efectos */
+}
+
+.btn-about:hover {
+  background-color: #002c76; /* Azul más oscuro */
+  color: #fff;
+  transform: scale(1.05); /* Aumentar el tamaño del botón */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Aumentar la sombra */
+}
+
+.btn-contact {
+  background-color: transparent; /* Fondo transparente */
+  color: #d52b1e; /* Rojo chileno */
+  border: 2px solid #d52b1e; /* Borde rojo chileno */
+  transition: all 0.3s ease-in-out; /* Transición suave para efectos */
+}
+
+.btn-contact:hover {
+  background-color: #d52b1e; /* Rojo chileno */
+  color: #fff;
+  transform: scale(1.05); /* Aumentar el tamaño del botón */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Aumentar la sombra */
+}
+
+/* Efecto de foco en los botones */
+.btn-animated:focus {
+  outline: none; /* Quitar el borde por defecto */
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5); /* Añadir una sombra sutil */
+}
+
+/* Estilo para las tarjetas */
+.bg-chilean-white {
+  background-color: #ffffff; /* Blanco chileno */
+  color: #0033a0; /* Texto en azul para contraste */
+}
+
+.bg-chilean-blue {
+  background-color: #0033a0; /* Azul chileno */
+}
+
+.bg-chilean-red {
+  background-color: #d52b1e; /* Rojo chileno */
+}
+
+/* Estilo para el número en las tarjetas */
+.hero .card h2 {
+  font-size: 2.5rem;
+  color: #fff; /* Color blanco para el número en tarjetas azul y roja */
+}
+
+/* Estilo para el texto de descripción en las tarjetas */
+.hero .card p {
+  color: #f0f0f0; /* Texto claro */
+}
+
+/* Animación en las tarjetas */
+.hover-transform:hover {
+  transform: scale(1.05); /* Aumentar tamaño de la tarjeta */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Sombra en hover */
+}
+
+/* Efecto de sombra en el texto */
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}

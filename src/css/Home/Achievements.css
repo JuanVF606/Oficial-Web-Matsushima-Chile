@@ -1,0 +1,22 @@
+/* Achievements.css */
+.achievement-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.achievement-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.achievement-img {
+  height: 200px;
+  object-fit: cover;
+}
+
+#achievements {
+  background-color: #f8f9fa62;
+}
+
+#achievements h2 {
+  color: #0056b3;
+}

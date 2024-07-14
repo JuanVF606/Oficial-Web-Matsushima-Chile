@@ -1,0 +1,4 @@
+/* Asegura que el Footer esté siempre al final de la página */
+footer {
+  margin-top: auto;
+}

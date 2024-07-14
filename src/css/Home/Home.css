@@ -1,0 +1,64 @@
+/* Home.css */
+
+/* Sección CTA */
+.cta-container {
+  background: #0056b3; /* Color de fondo */
+  color: white; /* Color del texto */
+  padding: 2rem; /* Espaciado */
+  margin-top: 2rem; /* Margen superior */
+  border-radius: 0.5rem; /* Bordes redondeados */
+}
+
+.cta-container h2 {
+  margin-bottom: 1rem;
+}
+
+.cta-container p {
+  margin-bottom: 1.5rem;
+}
+
+.cta-container .btn-primary {
+  background-color: #003d7a; /* Color del botón */
+  border: none;
+}
+
+.cta-container .btn-primary:hover {
+  background-color: #002b5e; /* Color del botón al pasar el ratón */
+}
+
+/* Sección de Testimonios */
+.testimonials {
+  background: #f8f9fa;
+  padding: 3rem 0;
+}
+
+.testimonials h2 {
+  color: #0056b3; /* Color del título */
+}
+
+/* Sección de Historias de Éxito */
+.success-stories {
+  padding: 3rem 0;
+}
+
+.success-stories h2 {
+  color: #0056b3; /* Color del título */
+}
+
+/* Sección de Blog */
+.blog {
+  background: #f8f9fa;
+  padding: 3rem 0;
+}
+
+.blog h2 {
+  color: #0056b3; /* Color del título */
+}
+
+/* Estilo para el contenedor de testimonios */
+.testimonial-card {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

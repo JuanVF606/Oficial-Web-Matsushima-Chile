@@ -1,0 +1,17 @@
+/* UpcomingEvents.css */
+.event-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#upcoming-events {
+  background-color: #f8f9fa;
+}
+
+#upcoming-events h2 {
+  color: #0056b3;
+}

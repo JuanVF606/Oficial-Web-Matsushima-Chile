@@ -1,0 +1,85 @@
+/* ContactAndSocial.css */
+
+#contact-social {
+  background-color: #f8f9fa; /* Fondo claro para la sección */
+}
+
+/* Estilo del título de contacto y redes sociales */
+#contact-social h2 {
+  color: #0056b3; /* Color de texto azul para los títulos */
+}
+
+/* Estilo del formulario */
+#contact-social .form-control {
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#contact-social .form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 86, 179, 0.25); /* Sombra azul al enfocar */
+  border-color: #0056b3; /* Borde azul al enfocar */
+}
+
+/* Estilo del botón de enviar */
+#contact-social .btn-primary {
+  background-color: #0056b3; /* Color de fondo azul */
+  border: none;
+}
+
+#contact-social .btn-primary:hover {
+  background-color: #004494; /* Color de fondo azul oscuro en hover */
+}
+
+/* Estilo de los íconos de redes sociales */
+#contact-social .social-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2rem; /* Tamaño de los íconos */
+  color: #0056b3; /* Color azul para los íconos */
+  transition: color 0.3s, transform 0.3s; /* Transiciones para hover */
+  text-decoration: none; /* Quitar subrayado */
+}
+
+#contact-social .social-icon:hover {
+  color: #003d7a; /* Color azul oscuro en hover */
+  transform: scale(1.2); /* Aumentar tamaño en hover */
+}
+
+/* Estilo del texto de las redes sociales */
+#contact-social .social-text {
+  margin-top: 0.5rem;
+  color: #0056b3; /* Color del texto debajo del ícono */
+  font-size: 0.875rem; /* Tamaño del texto */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  font-weight: 600; /* Negrita */
+}
+
+/* Estilo para pantallas grandes */
+@media (min-width: 992px) {
+  #contact-social .social-icon {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #contact-social .social-text {
+    margin-left: 0.5rem; /* Espacio entre el ícono y el texto */
+    margin-top: 0; /* Eliminar margen superior */
+  }
+}
+
+/* Estilo adicional para dispositivos móviles */
+@media (max-width: 767px) {
+  #contact-social .social-icon {
+    font-size: 1.5rem; /* Tamaño de íconos más pequeño en pantallas pequeñas */
+  }
+
+  #contact-social .social-text {
+    display: none; /* Ocultar texto en pantallas pequeñas */
+  }
+
+  /* Alinear íconos de redes sociales en una sola columna */
+  #contact-social .d-flex {
+    flex-direction: column;
+  }
+}

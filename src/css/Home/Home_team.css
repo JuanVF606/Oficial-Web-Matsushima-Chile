@@ -1,0 +1,97 @@
+/* NationalDirectors.css */
+
+.NationalDirectors {
+  text-align: center;
+  background-color: #f8f9fa; /* Fondo claro para la sección */
+}
+
+.NationalDirectors::before {
+  content: "";
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  z-index: -1;
+}
+
+.NationalDirectors .container {
+  position: relative;
+}
+
+/* Título de la sección */
+.NationalDirectors .display-5 {
+  color: #0056b3;
+  text-align: left; /* Alinear el título a la izquierda */
+}
+
+/* Estilos de las tarjetas */
+.NationalDirectors .card {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff; /* Fondo blanco para las tarjetas */
+  transition: transform 0.3s;
+}
+
+/* Efecto hover en las tarjetas */
+.NationalDirectors .card:hover {
+  transform: translateY(-10px);
+}
+
+/* Estilos de la imagen del director */
+.NationalDirectors .director-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 4px solid #0056b3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin: 0 auto;
+  transition: transform 0.3s;
+}
+
+/* Efecto hover en la imagen del director */
+.NationalDirectors .director-img:hover {
+  transform: scale(1.1);
+}
+
+/* Estilos del cuerpo de la tarjeta */
+.NationalDirectors .card-body {
+  background-color: #f8f9fa;
+}
+
+/* Estilo del título dentro de la tarjeta */
+.NationalDirectors .card-title {
+  color: #0056b3;
+}
+
+/* Estilo del subtítulo dentro de la tarjeta */
+.NationalDirectors .card-subtitle {
+  color: #6c757d;
+}
+
+/* Estilo del texto dentro de la tarjeta */
+.NationalDirectors .card-text {
+  color: #6c757d;
+}
+
+/* Estilo adicional para dispositivos móviles */
+@media (max-width: 767px) {
+  .NationalDirectors .display-5 {
+    text-align: center; /* Centrar el título en pantallas pequeñas */
+  }
+
+  /* Estilo de la imagen del director en dispositivos móviles */
+  .NationalDirectors .director-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  /* Reducir tamaño del texto en dispositivos móviles */
+  .NationalDirectors .card-title, .NationalDirectors .card-subtitle, .NationalDirectors .card-text {
+    font-size: 0.9rem;
+  }
+}

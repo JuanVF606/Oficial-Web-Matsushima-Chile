@@ -1,0 +1,56 @@
+/* LatestNews.css */
+.latest-news {
+  text-align: center;
+}
+
+.latest-news h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+.latest-news .card {
+  border: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.latest-news .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.latest-news .card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.latest-news .card-body {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.latest-news .card-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.latest-news .card-text {
+  font-family: 'Roboto', sans-serif;
+  color: #555;
+}
+
+.latest-news .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  font-family: 'Roboto', sans-serif;
+}
+
+.latest-news .btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
