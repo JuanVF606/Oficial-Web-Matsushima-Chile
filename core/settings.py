@@ -34,7 +34,7 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = [
-    "apps.auths", "apps.calendario", "apps.blackbelts"
+    "apps.auths", "apps.calendario", "apps.blackbelts", "apps.categories"
 ]
 
 THIRD_PARTY_APPS = [
@@ -145,8 +145,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
-LANGUAGE_CODE = 'es'
-TIME_ZONE = 'America/Chile'
+LANGUAGE_CODE = 'es-es'
+TIME_ZONE = 'America/Santiago'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -211,9 +211,9 @@ DJOSER = {
     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
     'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://localhost:8000/google', 'http://localhost:8000/facebook'],
     'SERIALIZERS': {
-        'user_create': 'apps.auths.serializers.UserSerializer',
-        'user': 'apps.auths.serializers.UserSerializer',
-        'current_user': 'apps.auths.serializers.UserSerializer',
+        'user_create': 'apps.auths.serializers.UserAccountSerializer',
+        'user': 'apps.auths.serializers.UserAccountSerializer',
+        'current_user': 'apps.auths.serializers.UserAccountSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
     },
 }
