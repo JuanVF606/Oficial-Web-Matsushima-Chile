@@ -6,41 +6,37 @@ const Activities = ({
   previous,
   post,
   count,
-  get_activities_by_page,
+  get_actividades_list_page,
 }) => {
-  const handleNext = (event, nextPage) => {
+  const handleNextPage = (event, nextPage) => {
     event.preventDefault();
-    get_activities_by_page(nextPage);
+    get_actividades_list_page(nextPage);
   };
-  const handlePrevious = (event, previousPage) => {
+  const handlePreviousPage = (event, previousPage) => {
     event.preventDefault();
-    get_activities_by_page(previousPage);
+    get_actividades_list_page(previousPage);
   };
 
   return (
-    <div>
+    <>
       {post && post.length > 0 ? (
         <Fragment>
-          <CardActivites posts={post && post} />
+          <div className="mt-5">
+            <CardActivites posts={post && post} />
+          </div>
           <SmallSetPagination
-            list_page={get_activities_by_page && get_activities_by_page}
-            count={count}
-            next={handleNext}
-            previous={handlePrevious}
+            list_page={get_actividades_list_page && get_actividades_list_page}
+            count={count && count}
+            handleNextPage={handleNextPage}
+            handlePreviousPage={handlePreviousPage}
           />
         </Fragment>
       ) : (
-        <>
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12 text-center">
-                <h2>No hay actividades disponibles</h2>
-              </div>
-            </div>
-          </div>
-        </>
+        <div className="alert alert-warning text-center bg-red" role="alert">
+          No hay actividades para mostrar
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

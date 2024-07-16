@@ -8,7 +8,6 @@ import Achievements from "../../containers/Home/Achievements";
 import Gallery from "../../containers/Home/Gallery";
 import ContactAndSocial from "../../containers/Home/ContactAndSocial";
 import SuccessStories from "../../containers/Home/SuccessStories";
-import Blog from "../../containers/Home/Blog";
 import { Button } from "react-bootstrap";
 
 const Home = () => {
@@ -18,17 +17,13 @@ const Home = () => {
 
       <Team />
 
-      <div className="container mt-5">
-        <LatestNews />
-      </div>
+      <UpcomingEvents />
 
-        <UpcomingEvents />
+      <SuccessStories />
 
       <Achievements />
 
       <Gallery />
-
-      <Blog />
 
       <section className="cta-container py-5 text-center">
         <h2 className="mb-4">¡Se parte de la organización!</h2>
@@ -40,8 +35,7 @@ const Home = () => {
         </Button>
       </section>
 
-      <SuccessStories />
-
+      <LatestNews />
 
       <ContactAndSocial />
     </Layout>

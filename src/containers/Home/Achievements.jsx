@@ -52,7 +52,7 @@ const Achievements = () => {
           ))}
         </Row>
         <div className="text-center mt-4">
-          <a href="/#" className="btn btn-primary">Ver más</a>
+          <a href="/noticias/logros-y-reconocimiento" className="btn btn-primary">Ver más</a>
         </div>
       </Container>
     </section>

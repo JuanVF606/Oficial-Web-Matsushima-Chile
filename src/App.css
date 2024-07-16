@@ -12,4 +12,5 @@
 @import "./css/About/About.css";
 @import "./css/About/Tree.css";
 /* Events */
+@import "./css/Events/Cards.css";
 @import "./css/Events/Categories.css";

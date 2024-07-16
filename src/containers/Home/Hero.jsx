@@ -21,17 +21,12 @@ const Hero = () => {
           <p className="lead mb-4 text-shadow">¡Donde el karate se convierte en una forma de vida!</p>
           <div className="d-flex flex-column flex-md-row justify-content-center gap-3 mb-5">
             <Link 
-              to="/about" 
+              to="/nuestros-dojos" 
               className="btn btn-light btn-lg px-4 py-2 rounded-pill shadow-lg hover-opacity-80 btn-animated btn-about"
             >
-              Conoce Más
+              Entrena con Nosotros
             </Link>
-            <Link 
-              to="/contact" 
-              className="btn btn-outline-light btn-lg px-4 py-2 rounded-pill shadow-lg hover-opacity-80 btn-animated btn-contact"
-            >
-              Contáctanos
-            </Link>
+           
           </div>
         </div>
         <div className="container text-center mt-4 mt-md-5">

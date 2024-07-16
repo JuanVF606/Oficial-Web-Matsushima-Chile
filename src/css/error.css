@@ -1,0 +1,274 @@
+/* Estilos Globales */
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%; /* 10px base para la unidad rem */
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-size: 1.6rem; /* 16px */
+  color: #293b49;
+  background-color: #f4f4f9; /* Fondo gris claro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Contenedor Principal */
+
+.notfound {
+  text-align: center;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Diseño del Error */
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Número del Error */
+
+.number {
+  font-weight: 900;
+  font-size: 10rem; /* Ajustado para que sea visible en diferentes tamaños */
+  line-height: 1;
+  color: #293b49;
+  margin: 0;
+}
+
+.illustration {
+  position: relative;
+  width: 12.2rem;
+  margin: 1.5rem 0; /* Espacio ajustado para pantallas pequeñas */
+}
+
+/* Círculo */
+
+.circle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 12.2rem;
+  height: 11.4rem;
+  border-radius: 50%;
+  background-color: #293b49;
+}
+
+/* Clip */
+
+.clip {
+  position: absolute;
+  bottom: 0.3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  width: 12.5rem;
+  height: 13rem;
+  border-radius: 0 0 50% 50%;
+}
+
+/* Papel */
+
+.paper {
+  position: absolute;
+  bottom: -0.3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 9.2rem;
+  height: 12.4rem;
+  border: 0.3rem solid #293b49;
+  background-color: white;
+  border-radius: 0.8rem;
+}
+
+.paper::before {
+  content: "";
+  position: absolute;
+  top: -0.7rem;
+  right: -0.7rem;
+  width: 1.4rem;
+  height: 1rem;
+  background-color: white;
+  border-bottom: 0.3rem solid #293b49;
+  transform: rotate(45deg);
+}
+
+/* Carita */
+
+.face {
+  margin-top: 2.3rem;
+}
+
+/* Ojos */
+
+.eyes {
+  position: relative;
+  width: 4.6rem;
+  height: 0.8rem;
+  margin: 0 auto;
+}
+
+.eye {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background-color: #293b49;
+  animation: eye 4s infinite ease-in-out;
+}
+
+.eye-left {
+  position: absolute;
+  left: 0;
+}
+
+.eye-right {
+  position: absolute;
+  right: 0;
+}
+
+/* Mejillas Rosadas */
+
+.rosyCheeks {
+  position: absolute;
+  top: 1.6rem;
+  width: 1rem;
+  height: 0.2rem;
+  border-radius: 50%;
+  background-color: #fdabaf;
+}
+
+.rosyCheeks-left {
+  left: 1.4rem;
+}
+
+.rosyCheeks-right {
+  right: 1.4rem;
+}
+
+/* Boca */
+
+.mouth {
+  position: absolute;
+  top: 3.1rem;
+  left: 50%;
+  width: 1.6rem;
+  height: 0.2rem;
+  border-radius: 0.1rem;
+  background-color: #293b49;
+  transform: translateX(-50%);
+}
+
+/* Texto y Botón */
+
+.text {
+  margin-top: 5rem;
+  font-weight: 300;
+  color: #293b49;
+}
+
+.button {
+  margin-top: 4rem;
+  padding: 1.2rem 3rem;
+  color: white;
+  background-color: #04cba0;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button:hover {
+  background-color: #01ac88;
+}
+
+/* Pie de Página */
+
+.by {
+  margin-top: 3rem;
+  font-size: 1.2rem;
+  color: #293b49;
+}
+
+.byLink {
+  color: #04cba0;
+  text-decoration: none;
+}
+
+.byLink:hover {
+  text-decoration: underline;
+}
+
+/* Animaciones */
+
+@keyframes eye {
+  0%, 100% {
+    height: 0.8rem;
+  }
+  50% {
+    height: 0.1rem;
+  }
+}
+
+/* Responsividad */
+
+@media (max-width: 768px) {
+  .number {
+    font-size: 8rem; /* Tamaño del número en pantallas más pequeñas */
+  }
+
+  .illustration {
+    width: 10rem;
+    margin: 1rem 0;
+  }
+
+  .button {
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+  }
+
+  .by {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .number {
+    font-size: 6rem; /* Tamaño del número en pantallas muy pequeñas */
+  }
+
+  .illustration {
+    width: 8rem;
+    margin: 0.5rem 0;
+  }
+
+  .button {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+
+  .text {
+    font-size: 1.4rem; /* Tamaño del texto en pantallas pequeñas */
+    margin-top: 4rem;
+  }
+
+  .by {
+    font-size: 0.9rem;
+  }
+}

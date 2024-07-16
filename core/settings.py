@@ -34,7 +34,13 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = [
-    "apps.auths", "apps.calendario", "apps.blackbelts", "apps.categories"
+    'apps.user',  # user account
+    'apps.category', # category section
+    "apps.blog", # notice section 
+    "apps.actividades", # activities section
+    "apps.Dojos", # instructors section
+    "apps.gallery", # gallery section
+   
 ]
 
 THIRD_PARTY_APPS = [
@@ -145,8 +151,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
-LANGUAGE_CODE = 'es-es'
-TIME_ZONE = 'America/Santiago'
+LANGUAGE_CODE = 'es'
+TIME_ZONE = 'America/Lima'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -166,7 +172,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'build/static')
+    os.path.join(BASE_DIR, 'build', 'static')
 ]
 
 
@@ -211,14 +217,14 @@ DJOSER = {
     'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
     'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': ['http://localhost:8000/google', 'http://localhost:8000/facebook'],
     'SERIALIZERS': {
-        'user_create': 'apps.auths.serializers.UserAccountSerializer',
-        'user': 'apps.auths.serializers.UserAccountSerializer',
-        'current_user': 'apps.auths.serializers.UserAccountSerializer',
+        'user_create': 'apps.user.serializers.UserSerializer',
+        'user': 'apps.user.serializers.UserSerializer',
+        'current_user': 'apps.user.serializers.UserSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
     },
 }
 
-AUTH_USER_MODEL = 'auths.UserAccount'
+AUTH_USER_MODEL = 'user.UserAccount'
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',

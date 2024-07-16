@@ -4,12 +4,13 @@ import { connect } from "react-redux";
 import Hero from "../common/Hero";
 import Categories from "./../../containers/events/Categories";
 import Activities from "../../containers/events/Activities.jsx";
-import { get_categories } from "../../redux/actions/categories.js";
+import { get_categories } from "../../redux/actions/categories/categories";
 import {
   get_actividades_list,
   get_actividades_list_page,
   get_actividades_list_category_page,
-} from "../../redux/actions/activities";
+} from "../../redux/actions/actividades/actividades";
+import HeroImage from "../../assets/img/Hero_Actividades.jpg";
 
 const Events = ({
   get_categories,
@@ -37,29 +38,32 @@ const Events = ({
   return (
     <Layout>
       <Hero
-        title={"Descurbre las Actividades de IKO Matsushima Chile"}
+        title={"Descubre las Actividades de IKO Matsushima Chile"}
         subtitle="y participa de nuestras actividades de entrenamiento y eventos especiales."
+        heroImage={HeroImage}
       />
 
-      <div className="container my-5">
-        <Categories categories={categories} />
+      <div className="mt-5 bg-light">
+        <Categories categories={categories && categories} />
+        <Activities
+          categories={categories}
+          post={posts && posts}
+          count={count}
+          get_activities_by_page={
+            get_actividades_list_page && get_actividades_list_page
+          }
+        />
       </div>
-      <Activities 
-        categories={categories}
-        posts={posts}
-        count={count}
-        get_activities_by_page={get_actividades_list_page && get_actividades_list_page}
-      />
     </Layout>
   );
 };
 
 const mapStateToProps = (state) => ({
-  // categories: state.categories.categories,
-  // posts: state.actividades.activity_list,
-  // count: state.actividades.count,
-  // next: state.actividades.next,
-  // previous: state.actividades.previous,
+  categories: state.categories.categories,
+  posts: state.actividades.activity_list,
+  count: state.actividades.count,
+  next: state.actividades.next,
+  previous: state.actividades.previous,
 });
 
 export default connect(mapStateToProps, {
