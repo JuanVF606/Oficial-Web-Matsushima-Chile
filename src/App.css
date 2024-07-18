@@ -14,3 +14,5 @@
 /* Events */
 @import "./css/Events/Cards.css";
 @import "./css/Events/Categories.css";
+/* Dojos */
+@import "./css/OurDojos/Dojos.css";

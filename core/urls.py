@@ -4,7 +4,6 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from django.conf import settings
 
-
 urlpatterns = [
     # Rutas de autenticación
     path('auth/', include('djoser.urls')),
@@ -27,4 +26,5 @@ urlpatterns = [
 # Ruta para capturar todas las demás rutas y dirigirlas a una plantilla HTML
 urlpatterns += [
     path('', TemplateView.as_view(template_name='index.html')),
+    path('<path:resource>', TemplateView.as_view(template_name='index.html')),
 ]

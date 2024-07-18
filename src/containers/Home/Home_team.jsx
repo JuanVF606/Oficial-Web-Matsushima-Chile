@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { get_dojos } from "../../redux/actions/dojos/dojos";
-
+import logo from "../../assets/img/logo.jpg";
 const NationalDirectors = ({ get_dojos, dojos }) => {
   const [error, setError] = useState(null);
 
@@ -12,7 +12,7 @@ const NationalDirectors = ({ get_dojos, dojos }) => {
       (dojo) => (dojo.is_Director === "Si") & (dojo.status === "published")
     )
     .sort((a, b) => {
-      const zonaOrder = {Nacional: 1, Norte: 2, Centro: 3, Sur: 4 };
+      const zonaOrder = { Nacional: 1, Norte: 2, Centro: 3, Sur: 4 };
       return zonaOrder[a.zona] - zonaOrder[b.zona];
     });
 
@@ -44,9 +44,13 @@ const NationalDirectors = ({ get_dojos, dojos }) => {
                     <Card className="border-0 shadow-lg rounded-4 overflow-hidden director-card">
                       <Card.Img
                         variant="top"
-                        src={director.img}
+                        src={director.profile_image}
                         alt={`${director.cargo} ${director.full_name}`}
                         className="img-fluid rounded-circle border border-4 border-primary mx-auto mt-3 director-img"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = logo;
+                        }}
                       />
                       <Card.Body className="p-4">
                         <Card.Title className="fw-bold mb-2 text-primary">
@@ -56,7 +60,6 @@ const NationalDirectors = ({ get_dojos, dojos }) => {
                           {director.zona === "Nacional"
                             ? "Director Nacional"
                             : `Director Zona ${director.zona}`}
-                          
                         </Card.Subtitle>
                         <Card.Text className="text-muted"></Card.Text>
                       </Card.Body>

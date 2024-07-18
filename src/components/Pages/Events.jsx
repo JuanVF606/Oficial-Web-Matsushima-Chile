@@ -38,8 +38,8 @@ const Events = ({
   return (
     <Layout>
       <Hero
-        title={"Descubre las Actividades de IKO Matsushima Chile"}
-        subtitle="y participa de nuestras actividades de entrenamiento y eventos especiales."
+        title={"Revisa nuestras actividades"}
+        subtitle="y enterate sobre nuestros examenes de grado, seminarios, torneos y mucho más..."
         heroImage={HeroImage}
       />
 

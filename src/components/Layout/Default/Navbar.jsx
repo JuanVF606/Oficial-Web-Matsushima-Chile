@@ -4,11 +4,10 @@ import logo from "../../../assets/img/MatsushimaChile-Logo.png"; // Asegúrate d
 
 const links = [
   { to: "/", title: "Bienvenida" },
-  { to: "/quienes-somos", title: "¿Quiénes Somos?" },
-  { to: "/nuestros-dojos", title: "Dojos en Chile" },
-  { to: "/actividades", title: "Agenda de Actividades" },
+  { to: "/quienes-somos", title: "Nosotros" },
+  { to: "/nuestros-dojos", title: "Dojos" },
+  { to: "/actividades", title: "Actividades" },
   { to: "/noticias", title: "Noticias y Novedades" },
-  { to: "/contacto", title: "Conéctate con Nosotros" },
 ];
 
 const Navbar = () => {

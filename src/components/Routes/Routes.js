@@ -21,6 +21,7 @@ function Browser(){
       <Route path="/noticias" element={<Notices />} />
       <Route path="/nuestros-dojos" element={<OurDojos />} />
       <Route path="/noticias/logros-y-reconocimiento" element={<Achievements />} /> 
+      <Route path="/galeria" element={<ErrorPage />} />
     </Routes>
   );
 

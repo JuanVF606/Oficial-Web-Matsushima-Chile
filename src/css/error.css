@@ -1,24 +1,6 @@
 /* Estilos Globales */
 
-html, body {
-  height: 100%;
-  margin: 0;
-}
 
-html {
-  font-size: 62.5%; /* 10px base para la unidad rem */
-}
-
-body {
-  font-family: "Lato", sans-serif;
-  font-size: 1.6rem; /* 16px */
-  color: #293b49;
-  background-color: #f4f4f9; /* Fondo gris claro */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
 
 /* Contenedor Principal */
 
