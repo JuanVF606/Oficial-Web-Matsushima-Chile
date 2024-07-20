@@ -57,7 +57,7 @@ const UpcomingEvents = (
         await get_actividades_list();
 
       } catch (error) {
-        setError("No se pudo cargar las últimas noticias");
+        setError("No se pudo cargar los eventos");
       }
     };
     fetchData();
@@ -110,7 +110,7 @@ const UpcomingEvents = (
         </Row>
         <div className="text-center mt-4">
           <Button  size="lg" href="/events">
-            <Link to="/events" className=" text-decoration-none text-white  fs-5 align-middle hover-text-white
+            <Link to="/actividades" className=" text-decoration-none text-white  fs-5 align-middle hover-text-white
             ">Ver todos los eventos</Link>
           </Button>
         </div>

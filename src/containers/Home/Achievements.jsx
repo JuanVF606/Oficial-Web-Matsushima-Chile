@@ -41,7 +41,7 @@ const Achievements = () => {
           {achievements.map(achievement => (
             <Col md={6} lg={3} key={achievement.id}>
               <Card className="h-100 shadow-sm border-0 achievement-card">
-                <Card.Img variant="top" src={achievement.image} alt={achievement.title} className="achievement-img" />
+                <Card.Img variant="top" src={achievement.image} alt={achievement.title} className="achievement-img" loading='lazy-loading' />
                 <Card.Body>
                   <Card.Title className="text-primary">{achievement.title}</Card.Title>
                   <Card.Subtitle className="mb-2 text-muted">{achievement.date}</Card.Subtitle>

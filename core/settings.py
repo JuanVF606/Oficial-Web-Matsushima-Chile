@@ -51,17 +51,19 @@ THIRD_PARTY_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'ckeditor',
+    'django_ckeditor_5',
     'ckeditor_uploader'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
 #CKEditor
-CKEDITOR_CONFIGS = {
+CKEDITOR_5_CONFIGS = {
     'default': {
         'toolbar': 'full',
-        'autoParagraph': False
-    }
+        'height': 400,
+        'width': '100%',
+    },
 }
 CKEDITOR_UPLOAD_PATH = "uploads/"
 

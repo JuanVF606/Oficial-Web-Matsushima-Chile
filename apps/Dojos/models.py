@@ -56,7 +56,7 @@ class Dojos(models.Model):
     full_name = models.CharField(max_length=100, blank=True)
     cargo = models.CharField(max_length=100, choices=CARGO_CHOICES, blank=True)
     slug = models.SlugField(max_length=255, unique=True, default=uuid.uuid4,  editable=False)
-    author =  models.ForeignKey(User, on_delete=models.CASCADE , null=True,  default=User)
+    author =  models.ForeignKey(User, on_delete=models.CASCADE , null=True,  )
     grado = models.CharField(max_length=10, choices=GRADO_CHOICES, blank=True)
     zona = models.CharField(max_length=10, choices=ZONA_CHOICES, blank=True)
     profile_image = models.ImageField(upload_to=blog_thumbnail_directory, blank=True)

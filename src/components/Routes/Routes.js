@@ -1,30 +1,20 @@
+import React, { Suspense } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import routes from './index';
+import LoadingSpinner from '../common/LoadingSpinner';
 
-import {Route,Routes, useLocation} from "react-router-dom";
-import Home from "../Pages/Home.jsx";
-import About from "../Pages/About.jsx";
-import Events from "../Pages/Events.jsx";
-import EventsCategory from "../Pages/EventsCategory.jsx";
-import Notices from "../Pages/Notices.jsx";
-import OurDojos from "../Pages/OurDojos.jsx";
-import Achievements from "../Pages/Achievements.jsx";
-import ErrorPage from "../Pages/error/ErrorPage.jsx";
-function Browser(){
+function Browser() {
   const location = useLocation();
 
   return (
-    <Routes location={location} key={location.pathname}>
-      <Route path="*" element={<ErrorPage />} />
-      <Route path="/" element={<Home />} />
-      <Route path="/quienes-somos" element={<About />} />
-      <Route path="/actividades" element={<Events />} />
-      <Route path="/actividades/categoria/:slug" element={<EventsCategory />} />
-      <Route path="/noticias" element={<Notices />} />
-      <Route path="/nuestros-dojos" element={<OurDojos />} />
-      <Route path="/noticias/logros-y-reconocimiento" element={<Achievements />} /> 
-      <Route path="/galeria" element={<ErrorPage />} />
-    </Routes>
+    <Suspense fallback={<LoadingSpinner/>}>
+      <Routes location={location} key={location.pathname}>
+        {routes.map(({ path, element }) => (
+          <Route key={path} path={path} element={element} />
+        ))}
+      </Routes>
+    </Suspense>
   );
-
 }
 
 export default Browser;

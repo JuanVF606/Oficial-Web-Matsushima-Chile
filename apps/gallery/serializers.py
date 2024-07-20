@@ -1,39 +1,18 @@
 from rest_framework import serializers
 from .models import *
 from apps.category.serializers import CategorySerializer
+class AdditionalItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdditionalItem
+        fields = ('url', 'is_video')
 
-class PostSerializer(serializers.ModelSerializer):
-    category=CategorySerializer()
-    get_status=serializers.CharField(source='status')
-    class Meta: 
-        model=Gallery
-        fields=[
-            'id',
-            'title',
-            'slug',
-            'thumbnail',
-            'published',
-            "instructor_a_cargo",
-            "date",
-            "link_drive",
-            'category',
-            'status',
-            'get_status'
-        ]
+class GallerySerializer(serializers.ModelSerializer):
+    additional_items = AdditionalItemSerializer(many=True, read_only=True)
 
-class PostListSerializer(serializers.ModelSerializer):
-    category=CategorySerializer()
-    class Meta: 
-        model=Gallery
-        fields=[
-            'id',
-            'title',
-            'slug',
-            'thumbnail',
-            "instructor_a_cargo",
-            "date",
-            "link_drive",
-            'published',
-            'category',
-            'status'
-        ]
+    class Meta:
+        model = Gallery
+        fields = (
+            'id', 'title', 'author', 'slug', 'thumbnail', 'category',
+            'date', 'published', 'instructor_a_cargo', 'status', 'link_drive',
+            'additional_items'
+        )

@@ -25,7 +25,7 @@ class Calendario(models.Model):
     title =         models.CharField(max_length=255, blank=True, null=True) #
     slug =          models.SlugField(max_length=255, unique=True, default=uuid.uuid4) 
     thumbnail =     models.ImageField(upload_to=blog_thumbnail_directory, max_length=500, blank=True, null=True)
-    author =        models.ForeignKey(User, on_delete=models.CASCADE, default=User)
+    author =        models.ForeignKey(User, on_delete=models.CASCADE, )
     description =   models.TextField(max_length=2500, blank=True, null=True)
     published =     models.DateTimeField(default=timezone.now, editable=False)
     views =         models.IntegerField(default=0, blank=True)

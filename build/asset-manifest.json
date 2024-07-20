@@ -1,7 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.843f21be.css",
-    "main.js": "/static/js/main.7582823a.js",
+    "main.css": "/static/css/main.b2333e58.css",
+    "main.js": "/static/js/main.31a6707a.js",
+    "static/media/Hero_notice.jpg": "/static/media/Hero_notice.eea58e49b33540dd6736.jpg",
     "static/media/MatsushimaChile-Logo.png": "/static/media/MatsushimaChile-Logo.280e0045fb9d25091a6c.png",
     "static/media/Hero.jpg": "/static/media/Hero.741670c00130aaf8f281.jpg",
     "static/media/Zona-Norte_Chile.jpg": "/static/media/Zona-Norte_Chile.38c417fba9e657e3cdbc.jpg",
@@ -9,13 +10,14 @@
     "static/media/Hero_Dojos.jpg": "/static/media/Hero_Dojos.0f68cc38f3f4d6682989.jpg",
     "static/media/Hero_Logros.jpg": "/static/media/Hero_Logros.6ec501feec331e525d91.jpg",
     "static/media/Zona-Centro_Chile.jpg": "/static/media/Zona-Centro_Chile.f66c9f9ea1e3ab1eab43.jpg",
+    "static/media/Hero_Galeria.jpg": "/static/media/Hero_Galeria.8e6b4c98357f56f3ec37.jpg",
     "static/media/logo.jpg": "/static/media/logo.d5ff9840e7e4b91dba10.jpg",
     "index.html": "/index.html",
-    "main.843f21be.css.map": "/static/css/main.843f21be.css.map",
-    "main.7582823a.js.map": "/static/js/main.7582823a.js.map"
+    "main.b2333e58.css.map": "/static/css/main.b2333e58.css.map",
+    "main.31a6707a.js.map": "/static/js/main.31a6707a.js.map"
   },
   "entrypoints": [
-    "static/css/main.843f21be.css",
-    "static/js/main.7582823a.js"
+    "static/css/main.b2333e58.css",
+    "static/js/main.31a6707a.js"
   ]
 }

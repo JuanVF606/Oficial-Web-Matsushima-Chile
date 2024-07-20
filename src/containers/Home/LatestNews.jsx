@@ -85,7 +85,7 @@ const LatestNews = ({
       </div>
       {/* Botón para ver más noticias */}
       <div className="text-center mt-4">
-        <a href="/#" className="btn btn-outline-primary btn-lg">
+        <a href="/noticias" className="btn btn-outline-primary btn-lg">
           Ver más noticias
         </a>
       </div>

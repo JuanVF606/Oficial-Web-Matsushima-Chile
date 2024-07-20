@@ -10,25 +10,25 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('blog', '0001_initial'),
         ('category', '0001_initial'),
+        ('gallery', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
+            model_name='gallery',
             name='author',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
-            model_name='post',
+            model_name='gallery',
             name='category',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='category.category'),
         ),
         migrations.AddField(
-            model_name='viewcount',
-            name='post',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='blogpost_view_count', to='blog.post'),
+            model_name='additionalitem',
+            name='gallery',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='additional_items', to='gallery.gallery'),
         ),
     ]

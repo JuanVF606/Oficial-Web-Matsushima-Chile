@@ -1,208 +1,84 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework import permissions
-from slugify import slugify
-from .models import Gallery
-from django.shortcuts import get_object_or_404
-from apps.category.models import Category
-from .serializers import PostSerializer, PostListSerializer
-from .pagination import SmallSetPagination, AdminSetPagination
-from .permissions import IsPostAuthorOrReadOnly,AuthorPermission
-from django.db.models.query_utils import Q
-from rest_framework.parsers import MultiPartParser, FormParser
+from django.shortcuts import render, get_object_or_404
+from django.views import View
+from django.http import JsonResponse
+from .models import Gallery, AdditionalItem
+from django.core.serializers import serialize
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+import json
 
-class GalleryListView(APIView):
-    permission_classes = (permissions.AllowAny,)
-    def get(self, request, format=None):
-        if Gallery.postobjects.all().exists():
+class GalleryListView(View):
+    def get(self, request):
+        galleries = Gallery.postobjects.all()
+        data = serialize('json', galleries)
+        return JsonResponse(data, safe=False)
 
-            posts = Gallery.postobjects.all()
+class GalleryDetailView(View):
+    print('GalleryDetailView')
+    def get(self, request, slug):
+        gallery = get_object_or_404(Gallery, slug=slug)
+        additional_items = AdditionalItem.objects.filter(gallery=gallery)
+        gallery_data = {
+            'gallery': serialize('json', [gallery]),
+            'additional_items': serialize('json', additional_items)
+        }
+        
+        if request.status_code == 404:
+            return JsonResponse({'message': 'Gallery not found'}, status=404)
+        if request.status_code == 200:
+            print('GalleryDetailView')
+            return JsonResponse(gallery_data, safe=False)
+        return JsonResponse(gallery_data, safe=False)
 
-            paginator = SmallSetPagination()
-            results = paginator.paginate_queryset(posts, request)
-            serializer = PostListSerializer(results, many=True)
+@method_decorator(csrf_exempt, name='dispatch')
+class GalleryCreateView(View):
+    def post(self, request):
+        data = json.loads(request.body)
+        gallery = Gallery.objects.create(
+            title=data['title'],
+            author_id=data['author'],
+            thumbnail=data['thumbnail'],
+            category_id=data['category'],
+            instructor_a_cargo=data.get('instructor_a_cargo', ''),
+            status=data.get('status', 'draft'),
+            link_drive=data.get('link_drive', '')
+        )
+        additional_items_data = data.get('additional_items', [])
+        for item in additional_items_data:
+            AdditionalItem.objects.create(
+                gallery=gallery,
+                url=item['url'],
+                is_video=item['is_video']
+            )
+        return JsonResponse({'message': 'Gallery created successfully', 'gallery': serialize('json', [gallery])}, status=201)
 
-            return paginator.get_paginated_response({'posts': serializer.data})
-        else:
-            return Response({'error':'No posts found'}, status=status.HTTP_404_NOT_FOUND)
-
-
-class ListPostsByCategoryView(APIView):
-    permission_classes = (permissions.AllowAny,)
-    def get(self, request, format=None):
-        if Gallery.postobjects.all().exists():
-
-            slug = request.query_params.get('slug')
-            category = Category.objects.get(slug=slug)
+@method_decorator(csrf_exempt, name='dispatch')
+class GalleryUpdateView(View):
+    def post(self, request, slug):
+        data = json.loads(request.body)
+        gallery = get_object_or_404(Gallery, slug=slug)
+        gallery.title = data.get('title', gallery.title)
+        gallery.thumbnail = data.get('thumbnail', gallery.thumbnail)
+        gallery.category_id = data.get('category', gallery.category_id)
+        gallery.instructor_a_cargo = data.get('instructor_a_cargo', gallery.instructor_a_cargo)
+        gallery.status = data.get('status', gallery.status)
+        gallery.link_drive = data.get('link_drive', gallery.link_drive)
+        gallery.save()
+        
+        AdditionalItem.objects.filter(gallery=gallery).delete()
+        additional_items_data = data.get('additional_items', [])
+        for item in additional_items_data:
+            AdditionalItem.objects.create(
+                gallery=gallery,
+                url=item['url'],
+                is_video=item['is_video']
+            )
             
-            posts = Gallery.postobjects.order_by('-published').all()
+        return JsonResponse({'message': 'Gallery updated successfully', 'gallery': serialize('json', [gallery])}, status=200)
 
-        # # Si la categoría tiene un padre, filtrar sólo por esta categoría y no por el padre también
-        # if category.parent:
-        #     posts = posts.filter(category=category)
-
-        # # Si la categoría no tiene una categoría padre, significa que ella misma es una categoría padre
-        # else: 
-
-            #Filtrar categoria sola
-            if not Category.objects.filter(parent=category).exists():
-                posts = posts.filter(category=category)
-            # Si esta categoría padre tiene hijos, filtrar por la categoría padre y sus hijos
-            else:
-                sub_categories = Category.objects.filter(parent=category)
-                
-                filtered_categories = [category]
-
-                for cat in sub_categories:
-                    filtered_categories.append(cat)
-
-                filtered_categories = tuple(filtered_categories)
-
-                posts = posts.filter(category__in=filtered_categories)
-                    
-            paginator = SmallSetPagination()
-            results = paginator.paginate_queryset(posts, request)
-            serializer = PostListSerializer(results, many=True)
-
-            return paginator.get_paginated_response({'posts': serializer.data})
-        else:
-            return Response({'error':'No posts found'}, status=status.HTTP_404_NOT_FOUND)
-
-
-class AuthorGalleryListView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
-    def get(self, request, format=None):
-
-        user = self.request.user
-
-        if Gallery.objects.filter(author=user).exists():
-
-            posts = Gallery.objects.filter(author=user)
-
-            paginator = SmallSetPagination()
-            results = paginator.paginate_queryset(posts, request)
-            serializer = PostListSerializer(results, many=True)
-
-            return paginator.get_paginated_response({'posts': serializer.data})
-        else:
-            return Response({'error':'No posts found'}, status=status.HTTP_404_NOT_FOUND)
-
-
-    
-    permission_classes = (IsPostAuthorOrReadOnly, )
-    parser_classes = [MultiPartParser, FormParser]
-
-    def put(self, request, format=None):
-        user = self.request.user
-
-        data = self.request.data
-        slug = data['slug']
-
-        
-        if not slug:
-            return Response({'error': 'Slug not provided'}, status=status.HTTP_400_BAD_REQUEST)
-
-        try:
-            post = Gallery.objects.get(slug=slug)
-        except Gallery.DoesNotExist:
-            return Response({'error': 'Post not found'}, status=status.HTTP_404_NOT_FOUND)
-
-        if(data['title']):
-            if not (data['title'] == 'undefined'):
-                post.title = data['title']
-                post.save()
-            if(data['new_slug']):
-                if not (data['new_slug'] == 'undefined'):
-                    post.slug = slugify(data['new_slug'])
-                    post.save()
-        if(data['description']):
-            if not (data['description'] == 'undefined'):
-                post.description = data['description']
-                post.save()
-        if(data['time_read']):
-            if not (data['time_read'] == 'undefined'):
-                post.time_read = data['time_read']
-                post.save()
-        if(data['content']):
-            if not (data['content'] == 'undefined'):
-                post.content = data['content']
-                post.save()
-
-        if(data['category']):
-            if not (data['category'] == 'undefined'):
-                category_id = int(data['category'])
-                category = Category.objects.get(id=category_id)
-                post.category = category
-                post.save()
-
-        thumbnail = data.get('thumbnail', None)
-        if thumbnail and not (thumbnail == 'undefined'):
-            post.thumbnail = thumbnail
-            post.save()
-        uploaded_file = data.get('file', None)
-        if uploaded_file and not (uploaded_file == 'undefined'):
-            # Aquí puedes manejar el archivo, guardarlo, procesarlo, etc.
-            # Ejemplo de cómo guardarlo en la carpeta de medios
-            post.file = uploaded_file
-            post.save()
-        
-            
-        return Response({'success': 'Post edited'})
-
-class DraftGalleryPostView(APIView):
-    permission_classes = (IsPostAuthorOrReadOnly, )
-    def put(self, request, format=None):
-        data = self.request.data
-        slug = data['slug']
-
-        post = Gallery.objects.get(slug=slug)
-
-        post.status = 'draft'
-        post.save()
-
-        return Response({'success': 'Post edited'})
-
-
-class PublishGalleryPostView(APIView):
-    permission_classes = (IsPostAuthorOrReadOnly, )
-    def put(self, request, format=None):
-        data = self.request.data
-        slug = data['slug']
-
-        post = Gallery.objects.get(slug=slug)
-
-        post.status = 'published'
-        post.save()
-
-        return Response({'success': 'Post edited'})
-
-class DeleteGalleryPostView(APIView):
-    permission_classes = (IsPostAuthorOrReadOnly, )
-    def delete(self, request, slug, format=None):
-        
-        post = Gallery.objects.get(slug=slug)
-
-        post.delete()
-
-        return Response({'success': 'Post edited'})
-
-
-class CreateGalleryPostView(APIView):
-    permission_classes = (AuthorPermission, )
-    def post(self, request, format=None):
-        user = self.request.user
-        Gallery.objects.create(author=user)
-
-        return Response({'success': 'Post edited'})
-
-class AdminListGalleryView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
-    def get(self, request, format=None):
-        posts = Gallery.objects.all()
-
-        paginator = AdminSetPagination()
-        results = paginator.paginate_queryset(posts, request)
-        serializer = PostListSerializer(results, many=True)
-
-        return paginator.get_paginated_response({'posts': serializer.data})
+@method_decorator(csrf_exempt, name='dispatch')
+class GalleryDeleteView(View):
+    def delete(self, request, slug):
+        gallery = get_object_or_404(Gallery, slug=slug)
+        gallery.delete()
+        return JsonResponse({'message': 'Gallery deleted successfully'}, status=200)

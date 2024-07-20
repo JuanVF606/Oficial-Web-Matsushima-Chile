@@ -16,3 +16,9 @@
 @import "./css/Events/Categories.css";
 /* Dojos */
 @import "./css/OurDojos/Dojos.css";
+
+/* Galeria */
+@import "./css/Gallery/Gallery.css";
+/* notices */
+@import "./css/notice/Notices.css";
+@import "./css/notice/Categories.css";

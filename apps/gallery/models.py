@@ -9,6 +9,19 @@ def blog_thumbnail_directory(instance, filename):
     return 'gallery/{0}/{1}'.format(instance.title, filename)
 
 
+
+class AdditionalItem(models.Model):
+    gallery = models.ForeignKey('Gallery', on_delete=models.CASCADE, related_name='additional_items')
+    title = models.CharField(max_length=255)
+    thumbnail = models.ImageField(upload_to=blog_thumbnail_directory, blank=True, null=True)
+    thumbnail2 = models.ImageField(upload_to=blog_thumbnail_directory, blank=True, null=True)
+    thumbnail3 = models.ImageField(upload_to=blog_thumbnail_directory, blank=True, null=True)
+    thumbnail4 = models.ImageField(upload_to=blog_thumbnail_directory, blank=True, null=True)
+    thumbnail5 = models.ImageField(upload_to=blog_thumbnail_directory, blank=True, null=True)
+    url = models.URLField(max_length=255)
+    def __str__(self):
+        return self.url
+
 # Modelo principal de la galería
 class Gallery(models.Model):
     class PostObjects(models.Manager):
@@ -21,9 +34,10 @@ class Gallery(models.Model):
     )
 
     title = models.CharField(max_length=255)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, default=User)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True, default=uuid.uuid4, editable=False)
     thumbnail = models.ImageField(upload_to=blog_thumbnail_directory, blank=True, null=True)
+    video = models.URLField(max_length=255, blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
     published = models.DateTimeField(auto_now_add=True)
