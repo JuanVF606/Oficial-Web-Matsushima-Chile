@@ -1,5 +1,4 @@
 import React from "react";
-import "../../../css/error.css";
 const ErrorPage = () => {
   return (
     <div className="center notfound">

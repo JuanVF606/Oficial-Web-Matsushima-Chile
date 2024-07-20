@@ -27,7 +27,6 @@
   transition: all 0.3s ease-in-out;
 }
 
-
 .navbar-nav .nav-link {
   font-size: 1.125rem;
   color: #00509e; /* Azul suave */
@@ -46,9 +45,6 @@
   right: 50%;
   background-color: #ac3636; /* Rojo suave */
   transition: all 0.3s ease-in-out;
-  /* no tan largo */
-  
-
 }
 
 .navbar-nav .nav-link:hover::after,
@@ -78,5 +74,5 @@
 
 /* Logo Karate */
 .karate-logo {
-  height: 50px   /* Tamaño del logo */;
+  height: 50px; /* Tamaño del logo */
 }
