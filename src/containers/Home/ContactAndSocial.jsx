@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { FaFacebookF, FaInstagram, FaTwitter, FaEnvelope } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaEnvelope } from 'react-icons/fa';
+import { FaXTwitter } from "react-icons/fa6";
+
 
 const ContactAndSocial = () => {
   // Manejar el envío del formulario para abrir el cliente de correo
@@ -58,7 +60,7 @@ const ContactAndSocial = () => {
                 <span className="social-text">Instagram</span>
               </a>
               <a href="https://twitter.com/IKO_Matsushima" className="social-icon" target="_blank" rel="noopener noreferrer">
-                <FaTwitter />
+                <FaXTwitter />
                 <span className="social-text">Twitter</span>
               </a>
               <a href="mailto:info@ikomatsushima.cl" className="social-icon" target="_blank" rel="noopener noreferrer">

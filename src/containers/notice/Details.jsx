@@ -5,7 +5,8 @@ import { get_blog } from '../../redux/actions/blog/blog';
 import { get_categories } from '../../redux/actions/categories/categories';
 import { connect } from 'react-redux';
 import DOMPurify from 'dompurify';
-import { FaUser, FaCalendarAlt, FaTags, FaFacebookF, FaTwitter, FaWhatsapp } from 'react-icons/fa';
+import { FaUser, FaCalendarAlt, FaTags, FaFacebookF, FaWhatsapp } from 'react-icons/fa';
+import { FaXTwitter } from "react-icons/fa6";
 import { Spinner } from 'react-bootstrap';
 import defaultThumbnail from '../../assets/img/Hero_Dojos.jpg';
 
@@ -149,7 +150,7 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
                       <FaFacebookF />
                     </a>
                     <a href={`https://twitter.com/intent/tweet?url=${postUrl}`} target="_blank" rel="noreferrer" className="social-icon">
-                      <FaTwitter />
+                      <FaXTwitter />
                     </a>
                     <a href={`https://wa.me/?text=${postUrl}`} target="_blank" rel="noreferrer" className="social-icon">
                       <FaWhatsapp />
