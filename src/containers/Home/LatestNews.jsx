@@ -7,7 +7,9 @@ import {
 import { get_categories } from "./../../redux/actions/categories/categories";
 import { CalendarIcon } from "@heroicons/react/24/solid";
 import moment from "moment";
+import logo from "../../assets/img/logo.jpg";
 moment.locale("es");
+
 
 const LatestNews = ({
   get_categories,
@@ -37,7 +39,7 @@ const LatestNews = ({
     <div className="col-md-4" key={news.id || index}>
       <div className="card mb-4 shadow-sm">
         <img
-          src={news.image || "https://via.placeholder.com/300"}
+          src={news.thumbnail || logo}
           className="card-img-top"
           alt={news.title}
         />
@@ -48,12 +50,12 @@ const LatestNews = ({
               className="text-gray-400"
               aria-hidden="true"
             />
-            {moment(news.date).format("MMM Do YY")}
+            {moment(news.date).format("DD [de] MMMM [del] YYYY")}
           </small>
         </p>
         <div className="card-body">
           <h5 className="card-title">{news.title}</h5>
-          <p className="card-text">{news.description}</p>
+          <p className="card-text">{news.description.length > 100 ? `${news.description.slice(0, 90)}...` : news.description}</p>
           <p className="card-text">
             <small className="text-muted">
               <i className="far fa-calendar-alt"></i> {news.date}

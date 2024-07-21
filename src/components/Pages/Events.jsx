@@ -8,7 +8,6 @@ import { get_categories } from "../../redux/actions/categories/categories";
 import {
   get_actividades_list,
   get_actividades_list_page,
-  get_actividades_list_category_page,
 } from "../../redux/actions/actividades/actividades";
 import HeroImage from "../../assets/img/Hero_Actividades.jpg";
 
@@ -70,5 +69,4 @@ export default connect(mapStateToProps, {
   get_categories,
   get_actividades_list,
   get_actividades_list_page,
-  get_actividades_list_category_page,
 })(Events);

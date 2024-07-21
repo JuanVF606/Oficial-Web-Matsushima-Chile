@@ -1,12 +1,13 @@
+/* Notices Section */
 .notices-section {
-  padding: 20px;
-  max-width: 1200px;
+  padding: 15px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
 .section-title {
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
   text-align: center;
   color: #333;
 }
@@ -14,45 +15,44 @@
 .search-container {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .search-container input[type="text"] {
   flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
+  padding: 8px;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .search-icon {
-  margin-left: -30px;
+  margin-left: -25px;
   color: #007bff;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .noticias-list {
   display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
-
 
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .pagination-button {
   background: #007bff;
   color: white;
   border: none;
-  padding: 10px 15px;
-  margin: 0 5px;
+  padding: 8px 12px;
+  margin: 0 3px;
   cursor: pointer;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .pagination-button.active {
@@ -70,46 +70,45 @@
 
 @media (max-width: 768px) {
   .search-container input[type="text"] {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   
   .pagination-button {
-    font-size: 0.9rem;
-    padding: 8px 12px;
+    font-size: 0.8rem;
+    padding: 6px 10px;
   }
 }
 
-
-/* cards notices */
+/* Cards Notices */
 .noticia {
-  border: 1px solid #e0e0e0;
+  border: 1px solid #d0d0d0;
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 20px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .noticia:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .noticia-image {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #d0d0d0;
 }
 
 .noticia-content {
-  padding: 20px;
+  padding: 15px;
 }
 
 .noticia-title {
-  font-size: 1.8em;
-  margin: 0 0 10px;
+  font-size: 1.4rem;
+  margin: 0 0 8px;
   color: #333;
   font-weight: 600;
 }
@@ -117,24 +116,24 @@
 .noticia-category,
 .noticia-date {
   color: #666;
-  font-size: 0.9em;
+  font-size: 0.8rem;
   margin: 0;
 }
 
 .noticia-description {
-  margin: 15px 0;
-  font-size: 1em;
+  margin: 10px 0;
+  font-size: 0.9rem;
   color: #444;
 }
 
 .noticia-link {
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 8px;
   color: #007bff;
   font-weight: bold;
   text-decoration: none;
-  border: 2px solid #007bff;
-  padding: 8px 16px;
+  border: 1px solid #007bff;
+  padding: 6px 12px;
   border-radius: 4px;
   transition: background-color 0.3s, color 0.3s;
 }
@@ -143,4 +142,3 @@
   background-color: #007bff;
   color: #ffffff;
 }
-

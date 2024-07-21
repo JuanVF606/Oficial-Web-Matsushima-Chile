@@ -29,6 +29,7 @@ const Notices = ({
     fetchData();
   }, [get_categories, get_blog_list]);
 
+  console.log("Posts:", posts);
   return (
     <Layout>
       <Hero
@@ -38,10 +39,10 @@ const Notices = ({
       />
       <section className="notices-section">
         <BlogList
-          categories={categories && categories}
           post={posts && posts}
           get_blog_list_page={get_blog_list_page && get_blog_list_page}
           count={count && count}
+          categories={categories && categories}
         />
       </section>
     </Layout>
@@ -51,9 +52,9 @@ const Notices = ({
 const mapStateToProps = (state) => ({
   categories: state.categories.categories,
   posts: state.blog.blog_list,
-  count: state.blog.blog_count,
-  next: state.blog.blog_next,
-  previous: state.blog.blog_previous,
+  count: state.blog.count,
+  next: state.blog.next,
+  previous: state.blog.previous,
 });
 
 export default connect(mapStateToProps, {
