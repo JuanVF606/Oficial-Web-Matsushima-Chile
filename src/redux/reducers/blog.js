@@ -19,6 +19,7 @@ const initialState = {
   count: null,
   next: null,
   previous: null,
+  relatedPosts: null,
 };
 
 export default function blog(state = initialState, action) {

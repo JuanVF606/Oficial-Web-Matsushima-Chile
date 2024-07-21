@@ -1,3 +1,4 @@
+from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -11,6 +12,21 @@ from .pagination import SmallSetPagination, AdminSetPagination
 from .permissions import IsPostAuthorOrReadOnly,AuthorPermission
 from django.db.models.query_utils import Q
 from rest_framework.parsers import MultiPartParser, FormParser
+
+
+class RelatedPostsView(generics.ListAPIView):
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        category_slug = self.kwargs.get('category_slug')
+        exclude_slug = self.kwargs.get('exclude_slug', None)
+        
+        queryset = Post.objects.filter(categories__slug=category_slug)
+        
+        if exclude_slug:
+            queryset = queryset.exclude(slug=exclude_slug)
+        
+        return queryset
 
 class BlogListView(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -30,46 +46,41 @@ class BlogListView(APIView):
 
 class ListPostsByCategoryView(APIView):
     permission_classes = (permissions.AllowAny,)
-    def get(self, request, format=None):
-        if Post.postobjects.all().exists():
 
+    def get(self, request, format=None):
+        # Verificar si hay posts disponibles
+        if Post.postobjects.all().exists():
             slug = request.query_params.get('slug')
-            category = Category.objects.get(slug=slug)
+            exclude_slug = request.query_params.get('exclude', None)  # Obtener el slug del post a excluir
             
+            # Intentar obtener la categoría por slug
+            try:
+                category = Category.objects.get(slug=slug)
+            except Category.DoesNotExist:
+                return Response({'error': 'Categoría no encontrada'}, status=status.HTTP_404_NOT_FOUND)
+            
+            # Filtrar posts por la categoría
             posts = Post.postobjects.order_by('-published').all()
 
-        # # Si la categoría tiene un padre, filtrar sólo por esta categoría y no por el padre también
-        # if category.parent:
-        #     posts = posts.filter(category=category)
-
-        # # Si la categoría no tiene una categoría padre, significa que ella misma es una categoría padre
-        # else: 
-
-            #Filtrar categoria sola
+            # Si la categoría no tiene una categoría padre, significa que ella misma es una categoría padre
             if not Category.objects.filter(parent=category).exists():
                 posts = posts.filter(category=category)
-            # Si esta categoría padre tiene hijos, filtrar por la categoría padre y sus hijos
             else:
                 sub_categories = Category.objects.filter(parent=category)
-                
-                filtered_categories = [category]
-
-                for cat in sub_categories:
-                    filtered_categories.append(cat)
-
-                filtered_categories = tuple(filtered_categories)
-
+                filtered_categories = [category] + list(sub_categories)
                 posts = posts.filter(category__in=filtered_categories)
-                    
+            
+            # Excluir el post especificado si el slug de exclusión es proporcionado
+            if exclude_slug:
+                posts = posts.exclude(slug=exclude_slug)
+                
             paginator = SmallSetPagination()
             results = paginator.paginate_queryset(posts, request)
             serializer = PostListSerializer(results, many=True)
-
+            
             return paginator.get_paginated_response({'posts': serializer.data})
         else:
-            return Response({'error':'No posts found'}, status=status.HTTP_404_NOT_FOUND)
-
-
+            return Response({'error': 'No posts found'}, status=status.HTTP_404_NOT_FOUND)
 class PostDetailView(APIView):
     permission_classes = (permissions.AllowAny,)
     def get(self, request, slug, format=None):

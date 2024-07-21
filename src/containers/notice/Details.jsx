@@ -17,6 +17,8 @@ import { Spinner } from "react-bootstrap";
 import defaultThumbnail from "../../assets/img/Hero_Dojos.jpg";
 import qrimage from "../../assets/img/matsushimachile_qr.png";
 import { Button } from "react-bootstrap";
+import RelatedPost from "./RelatedPost";
+
 const Details = ({ get_blog, post, categories, get_categories }) => {
   const { slug } = useParams();
   const postUrl = `https://www.ikomatsushima.cl/noticias/${slug}`;
@@ -32,24 +34,8 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
     fetchData();
   }, [slug, get_blog, get_categories]);
 
-  // Simulando datos de contenido relacionado
-  const relatedPosts = [
-    {
-      title: "Post Relacionado 1",
-      slug: "post-relacionado-1",
-      thumbnail: "/path/to/image1.jpg",
-    },
-    {
-      title: "Post Relacionado 2",
-      slug: "post-relacionado-2",
-      thumbnail: "/path/to/image2.jpg",
-    },
-    {
-      title: "Post Relacionado 3",
-      slug: "post-relacionado-3",
-      thumbnail: "/path/to/image3.jpg",
-    },
-  ];
+  const categorySlug = post?.category?.slug || '';
+  const currentPostSlug = slug;
 
   return (
     <Layout>
@@ -117,35 +103,7 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
             </div>
 
             {/* Tarjetas de contenido relacionado */}
-            <div className="related-posts mt-5">
-              <h2 className="mb-4">Contenido Relacionado</h2>
-              <div className="row">
-                {relatedPosts.map((relatedPost, index) => (
-                  <div key={index} className="col-md-4 mb-4">
-                    <div className="card border-light shadow-sm">
-                      {relatedPost.thumbnail && (
-                        <img
-                          src={relatedPost.thumbnail}
-                          className="card-img-top"
-                          alt={relatedPost.title}
-                          style={{ borderRadius: "0.5rem" }}
-                        />
-                      )}
-                      <div className="card-body">
-                        <h5 className="card-title">
-                          <Link
-                            to={`/noticias/${relatedPost.slug}`}
-                            className="text-decoration-none"
-                          >
-                            {relatedPost.title}
-                          </Link>
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <RelatedPost categorySlug={categorySlug} currentPostSlug={currentPostSlug} />
           </div>
 
           {/* Sidebar */}
@@ -215,20 +173,22 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
                 <div className="card-body">
                   <h2 className="card-title">Síguenos en Instagram</h2>
                   <p className="text-muted">
-                    escanea el código QR para seguirnos o haz click en el boton de abajo
-
+                    Escanea el código QR para seguirnos o haz clic en el botón de abajo
                   </p>
                   
-                  {/* insertar imagen de qrimage */}
-                    
-                  <img src={qrimage} alt="Instagram" style={{width:"250px", alignItems:"center", alignSelf:"center"}} />
+                  {/* Insertar imagen de qrimage */}
+                  <img src={qrimage} alt="QR Code" className="img-fluid mb-3" />
 
-                  <Button variant="primary" href="https://www.instagram.com/matsushimachile/" target="_blank" className="mt-3">
+                  <Button
+                    href="https://www.instagram.com/ikomatsushimachile"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn-primary w-100"
+                  >
                     Síguenos
                   </Button>
-
                 </div>
-                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -242,7 +202,9 @@ const mapStateToProps = (state) => ({
   categories: state.categories.categories,
 });
 
-export default connect(mapStateToProps, {
+const mapDispatchToProps = {
   get_blog,
   get_categories,
-})(Details);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Details);
