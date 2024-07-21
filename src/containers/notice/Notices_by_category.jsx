@@ -15,8 +15,8 @@ import { useParams } from "react-router-dom";
 const Notices = ({
   get_categories,
   categories,
-  get_blog_list,
-  get_blog_list_page,
+  get_blog_list_category,
+  get_blog_list_category_page,
   posts,
   count,
   next,
@@ -36,7 +36,7 @@ const Notices = ({
     };
 
     fetchData();
-  }, [get_categories, slug]);
+  }, [get_categories, slug, get_blog_list_category]);
   const handlePageChange = (page) => {
     // Llamar a la acción para obtener la siguiente página de blogs de la categoría
     get_blog_list_category_page(slug, page);

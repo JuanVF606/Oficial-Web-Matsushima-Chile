@@ -21,7 +21,6 @@ const Notices = ({
   next,
   previous,
 }) => {
-
   useEffect(() => {
     const fetchData = async () => {
       await get_categories();
@@ -30,7 +29,6 @@ const Notices = ({
     fetchData();
   }, [get_categories, get_blog_list]);
 
-  
   return (
     <Layout>
       <Hero
@@ -39,12 +37,12 @@ const Notices = ({
         heroImage={Hero_notice}
       />
       <section className="notices-section">
-
-        
-        <BlogList categories={categories && categories}
-        post={posts && posts}
-        get_blog_list_page={get_blog_list_page && get_blog_list_page}
-        count={count && count} />
+        <BlogList
+          categories={categories && categories}
+          post={posts && posts}
+          get_blog_list_page={get_blog_list_page && get_blog_list_page}
+          count={count && count}
+        />
       </section>
     </Layout>
   );

@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import CardActivites from "../../components/common/CardActivites.jsx";
-import SmallSetPagination from "../../components/common/Pagination/SmallSetPagination.jsx";
+import SmallSetPagination from "../../components/common/Pagination/SmallSetPagination";
 const Activities = ({
   next,
   previous,

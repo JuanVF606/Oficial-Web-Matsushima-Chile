@@ -1,7 +1,7 @@
 import React from "react";
 import Cards from "./Cards";
 import SmallSetPagination from "../../components/common/Pagination/SmallSetPagination";
-const Noticia = ({ posts, categories, get_blog_list_page, count }) => {
+const Noticia = ({ posts, get_blog_list_page, count }) => {
   const handleNextPage = (event, nextPage) => {
     event.preventDefault();
     // Lógica para cambiar la página
@@ -18,18 +18,16 @@ const Noticia = ({ posts, categories, get_blog_list_page, count }) => {
     <div>
       {posts && posts.length > 0 ? (
         <div>
-          <Cards
-            posts={posts && posts}
-          />
+          <Cards posts={posts && posts} />
           <SmallSetPagination
+            list_page={get_blog_list_page && get_blog_list_page}
             count={count}
             handleNextPage={handleNextPage}
             handlePreviousPage={handlePreviousPage}
           />
         </div>
       ) : (
-        <p className="noticia-placeholder"
-        >No se encontraron noticias.</p>
+        <p className="noticia-placeholder">No se encontraron noticias.</p>
       )}
     </div>
   );
