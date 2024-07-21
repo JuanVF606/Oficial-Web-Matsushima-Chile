@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import CardActivites from "../../components/common/CardActivites.jsx";
 import SmallSetPagination from "../../components/common/Pagination/SmallSetPagination";
+import CardActivites from "../../components/common/CardActivites.jsx";
 const Activities = ({
   next,
   previous,
@@ -11,10 +11,12 @@ const Activities = ({
   const handleNextPage = (event, nextPage) => {
     event.preventDefault();
     get_actividades_list_page(nextPage);
+    window.scrollTo(0, 0); // Scroll to top of the page
   };
   const handlePreviousPage = (event, previousPage) => {
     event.preventDefault();
     get_actividades_list_page(previousPage);
+    window.scrollTo(0, 0); // Scroll to top of the page
   };
 
   return (

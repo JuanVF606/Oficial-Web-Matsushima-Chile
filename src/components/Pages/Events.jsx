@@ -46,12 +46,12 @@ const Events = ({
       <div className="mt-5 bg-light">
         <Categories categories={categories && categories} />
         <Activities
-          categories={categories}
-          post={posts && posts}
-          count={count}
-          get_activities_by_page={
+          categories={categories && categories}
+          get_actividades_list_page={
             get_actividades_list_page && get_actividades_list_page
           }
+          post={posts && posts}
+          count={count && count}
         />
       </div>
     </Layout>
