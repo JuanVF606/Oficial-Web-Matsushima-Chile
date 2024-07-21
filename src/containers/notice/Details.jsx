@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import Layout from '../../components/Layout/Layout';
-import { useParams, Link } from 'react-router-dom';
-import { get_blog } from '../../redux/actions/blog/blog';
-import { get_categories } from '../../redux/actions/categories/categories';
-import { connect } from 'react-redux';
-import DOMPurify from 'dompurify';
-import { FaUser, FaCalendarAlt, FaTags, FaFacebookF, FaWhatsapp } from 'react-icons/fa';
+import React, { useEffect, useState } from "react";
+import Layout from "../../components/Layout/Layout";
+import { useParams, Link } from "react-router-dom";
+import { get_blog } from "../../redux/actions/blog/blog";
+import { get_categories } from "../../redux/actions/categories/categories";
+import { connect } from "react-redux";
+import DOMPurify from "dompurify";
+import {
+  FaUser,
+  FaCalendarAlt,
+  FaTags,
+  FaFacebookF,
+  FaWhatsapp,
+} from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { Spinner } from 'react-bootstrap';
-import defaultThumbnail from '../../assets/img/Hero_Dojos.jpg';
-
+import { Spinner } from "react-bootstrap";
+import defaultThumbnail from "../../assets/img/Hero_Dojos.jpg";
+import qrimage from "../../assets/img/matsushimachile_qr.png";
+import { Button } from "react-bootstrap";
 const Details = ({ get_blog, post, categories, get_categories }) => {
   const { slug } = useParams();
   const postUrl = `https://www.ikomatsushima.cl/noticias/${slug}`;
@@ -27,9 +34,21 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
 
   // Simulando datos de contenido relacionado
   const relatedPosts = [
-    { title: 'Post Relacionado 1', slug: 'post-relacionado-1', thumbnail: '/path/to/image1.jpg' },
-    { title: 'Post Relacionado 2', slug: 'post-relacionado-2', thumbnail: '/path/to/image2.jpg' },
-    { title: 'Post Relacionado 3', slug: 'post-relacionado-3', thumbnail: '/path/to/image3.jpg' },
+    {
+      title: "Post Relacionado 1",
+      slug: "post-relacionado-1",
+      thumbnail: "/path/to/image1.jpg",
+    },
+    {
+      title: "Post Relacionado 2",
+      slug: "post-relacionado-2",
+      thumbnail: "/path/to/image2.jpg",
+    },
+    {
+      title: "Post Relacionado 3",
+      slug: "post-relacionado-3",
+      thumbnail: "/path/to/image3.jpg",
+    },
   ];
 
   return (
@@ -50,23 +69,29 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
                       src={post.thumbnail || defaultThumbnail}
                       className="card-img-top"
                       alt={post.title}
-                      style={{ borderRadius: '0.5rem' }}
+                      style={{ borderRadius: "0.5rem" }}
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.src = defaultThumbnail;
-                      }
-                      }
+                      }}
                     />
                   )}
                   <div className="card-body">
                     <h1 className="card-title mb-4">{post.title}</h1>
                     <div className="d-flex justify-content-between mb-3 text-muted">
-                      <span><FaUser /> Autor : IKO MATSUSHIMA CHILE</span>
-                      <span><FaCalendarAlt /> {new Date(post.published).toLocaleDateString()}</span>
+                      <span>
+                        <FaUser /> Autor : IKO MATSUSHIMA CHILE
+                      </span>
+                      <span>
+                        <FaCalendarAlt />{" "}
+                        {new Date(post.published).toLocaleDateString()}
+                      </span>
                     </div>
                     <div
                       className="post-content"
-                      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(post.content),
+                      }}
                     />
                     <div className="mt-4">
                       <div className="d-flex align-items-center mb-3">
@@ -76,7 +101,10 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
                       <ul className="list-unstyled">
                         {post?.categories?.map((category, index) => (
                           <li key={index} className="mb-1">
-                            <Link to={`/noticias/categoria/${category.slug}`} className="text-decoration-none">
+                            <Link
+                              to={`/noticias/categoria/${category.slug}`}
+                              className="text-decoration-none"
+                            >
                               {category.name}
                             </Link>
                           </li>
@@ -100,12 +128,15 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
                           src={relatedPost.thumbnail}
                           className="card-img-top"
                           alt={relatedPost.title}
-                          style={{ borderRadius: '0.5rem' }}
+                          style={{ borderRadius: "0.5rem" }}
                         />
                       )}
                       <div className="card-body">
                         <h5 className="card-title">
-                          <Link to={`/noticias/${relatedPost.slug}`} className="text-decoration-none">
+                          <Link
+                            to={`/noticias/${relatedPost.slug}`}
+                            className="text-decoration-none"
+                          >
                             {relatedPost.title}
                           </Link>
                         </h5>
@@ -132,7 +163,10 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
                     </li>
                     {categories?.map((category, index) => (
                       <li key={index} className="mb-1">
-                        <Link to={`/noticias/categoria/${category.slug}`} className="text-decoration-none">
+                        <Link
+                          to={`/noticias/categoria/${category.slug}`}
+                          className="text-decoration-none"
+                        >
                           {category.name}
                         </Link>
                       </li>
@@ -146,18 +180,55 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
                 <div className="card-body">
                   <h2 className="card-title">Compartir</h2>
                   <div className="d-flex justify-content-between">
-                    <a href={`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`} target="_blank" rel="noreferrer" className="social-icon">
+                    <a
+                      href={`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="social-icon"
+                    >
                       <FaFacebookF />
                     </a>
-                    <a href={`https://twitter.com/intent/tweet?url=${postUrl}`} target="_blank" rel="noreferrer" className="social-icon">
+                    <a
+                      href={`https://twitter.com/intent/tweet?url=${postUrl}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="social-icon"
+                    >
                       <FaXTwitter />
                     </a>
-                    <a href={`https://wa.me/?text=${postUrl}`} target="_blank" rel="noreferrer" className="social-icon">
+                    <a
+                      href={`https://wa.me/?text=${postUrl}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="social-icon"
+                    >
                       <FaWhatsapp />
                     </a>
                   </div>
+                  <p className="text-muted mt-3">
+                    Comparte este post en tus redes sociales.
+                  </p>
                 </div>
+                <div className="card-footer"></div>
               </div>
+              <div className="widget card border-light shadow-sm mb-4">
+                <div className="card-body">
+                  <h2 className="card-title">Síguenos en Instagram</h2>
+                  <p className="text-muted">
+                    escanea el código QR para seguirnos o haz click en el boton de abajo
+
+                  </p>
+                  
+                  {/* insertar imagen de qrimage */}
+                    
+                  <img src={qrimage} alt="Instagram" style={{width:"250px", alignItems:"center", alignSelf:"center"}} />
+
+                  <Button variant="primary" href="https://www.instagram.com/matsushimachile/" target="_blank" className="mt-3">
+                    Síguenos
+                  </Button>
+
+                </div>
+                </div>
             </div>
           </div>
         </div>
