@@ -13,10 +13,9 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Button } from "react-bootstrap";
 import defaultThumbnail from "../../assets/img/Hero_Dojos.jpg";
 import qrimage from "../../assets/img/matsushimachile_qr.png";
-import { Button } from "react-bootstrap";
 import RelatedPost from "./RelatedPost";
 
 const Details = ({ get_blog, post, categories, get_categories }) => {
@@ -26,15 +25,32 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await get_categories();
-      await get_blog(slug);
-      setLoading(false);
+      try {
+        await get_categories();
+        await get_blog(slug);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
   }, [slug, get_blog, get_categories]);
 
-  const categorySlug = post?.category?.slug || '';
+  if (loading) {
+    return (
+      <Layout>
+        <div className="container my-5">
+          <div className="text-center p-5">
+            <Spinner animation="border" variant="primary" />
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  const categorySlug = post?.category?.slug;
   const currentPostSlug = slug;
 
   return (
@@ -44,62 +60,61 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
           {/* Contenido Principal */}
           <div className="col-md-8">
             <div className="post-details card border-light shadow-sm">
-              {loading ? (
-                <div className="text-center p-5">
-                  <Spinner animation="border" variant="primary" />
-                </div>
+              {post?.thumbnail ? (
+                <img
+                  src={post.thumbnail || defaultThumbnail}
+                  className="card-img-top"
+                  alt={post.title}
+                  style={{ borderRadius: "0.5rem" }}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = defaultThumbnail;
+                  }}
+                />
               ) : (
-                <>
-                  {post?.thumbnail && (
-                    <img
-                      src={post.thumbnail || defaultThumbnail}
-                      className="card-img-top"
-                      alt={post.title}
-                      style={{ borderRadius: "0.5rem" }}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = defaultThumbnail;
-                      }}
-                    />
-                  )}
-                  <div className="card-body">
-                    <h1 className="card-title mb-4">{post.title}</h1>
-                    <div className="d-flex justify-content-between mb-3 text-muted">
-                      <span>
-                        <FaUser /> Autor : IKO MATSUSHIMA CHILE
-                      </span>
-                      <span>
-                        <FaCalendarAlt />{" "}
-                        {new Date(post.published).toLocaleDateString()}
-                      </span>
-                    </div>
-                    <div
-                      className="post-content"
-                      dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(post.content),
-                      }}
-                    />
-                    <div className="mt-4">
-                      <div className="d-flex align-items-center mb-3">
-                        <FaTags className="me-2" />
-                        <span>Tags:</span>
-                      </div>
-                      <ul className="list-unstyled">
-                        {post?.categories?.map((category, index) => (
-                          <li key={index} className="mb-1">
-                            <Link
-                              to={`/noticias/categoria/${category.slug}`}
-                              className="text-decoration-none"
-                            >
-                              {category.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </>
+                <img
+                  src={defaultThumbnail}
+                  className="card-img-top"
+                  alt="Default Thumbnail"
+                  style={{ borderRadius: "0.5rem" }}
+                />
               )}
+              <div className="card-body">
+                <h1 className="card-title mb-4">{post.title}</h1>
+                <div className="d-flex justify-content-between mb-3 text-muted">
+                  <span>
+                    <FaUser /> Autor : IKO MATSUSHIMA CHILE
+                  </span>
+                  <span>
+                    <FaCalendarAlt />{" "}
+                    {new Date(post.published).toLocaleDateString()}
+                  </span>
+                </div>
+                <div
+                  className="post-content"
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(post.content),
+                  }}
+                />
+                <div className="mt-4">
+                  <div className="d-flex align-items-center mb-3">
+                    <FaTags className="me-2" />
+                    <span>Tags:</span>
+                  </div>
+                  <ul className="list-unstyled">
+                    {post?.categories?.map((category, index) => (
+                      <li key={index} className="mb-1">
+                        <Link
+                          to={`/noticias/categoria/${category.slug}`}
+                          className="text-decoration-none"
+                        >
+                          {category.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
 
             {/* Tarjetas de contenido relacionado */}
@@ -167,7 +182,6 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
                     Comparte este post en tus redes sociales.
                   </p>
                 </div>
-                <div className="card-footer"></div>
               </div>
               <div className="widget card border-light shadow-sm mb-4">
                 <div className="card-body">

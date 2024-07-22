@@ -16,8 +16,6 @@ import {
   GET_RELATED_POSTS_FAIL,
 } from "./types";
 
-
-
 export const get_author_blog_list = () => async (dispatch) => {
   const config = {
     headers: {
@@ -81,7 +79,8 @@ export const get_author_blog_list_page = (page) => async (dispatch) => {
 };
 
 // Ejemplo de manejo de carga y errores en una acción asincrónica
-export const get_blog_list =  (limit = null) =>
+export const get_blog_list =
+  (limit = null) =>
   async (dispatch) => {
     dispatch({ type: START_LOADING });
 
@@ -138,18 +137,17 @@ export const get_blog_list_page = (page) => async (dispatch) => {
   }
 };
 
-export const get_blog_list_category = (slug) => async (dispatch) => {
+export const get_blog_list_category = (slug, exclude) => async (dispatch) => {
   const config = {
     headers: {
       Accept: "application/json",
     },
   };
-
+  const apiUrl = exclude
+    ? `http://localhost:8000/api/blog/related_posts?slug=${slug}&exclude=${exclude}`
+    : `http://localhost:8000/api/blog/by_category?slug=${slug}`;
   try {
-    const res = await axios.get(
-      `http://localhost:8000/api/blog/by_category?slug=${slug}`,
-      config
-    );
+    const res = await axios.get(apiUrl, config);
 
     if (res.status === 200) {
       dispatch({
@@ -168,39 +166,40 @@ export const get_blog_list_category = (slug) => async (dispatch) => {
   }
 };
 
-export const get_related_post = (categorySlug, postSlug) => async (dispatch) => {
-  const config = {
-    headers: {
-      Accept: "application/json",
-    },
-  };
+export const get_related_post =
+  (categorySlug, postSlug) => async (dispatch) => {
+    const config = {
+      headers: {
+        Accept: "application/json",
+      },
+    };
 
-  try {
-    // Realiza la solicitud a la API para obtener los posts relacionados
-    const res = await axios.get(
-      `http://localhost:8000/api/blog/related_posts?slug=${categorySlug}&exclude=${postSlug}`,
-      config
-    );
+    try {
+      // Realiza la solicitud a la API para obtener los posts relacionados
+      const res = await axios.get(
+        `http://localhost:8000/api/blog/related_posts?slug=${categorySlug}&exclude=${postSlug}`,
+        config
+      );
 
-    if (res.status === 200) {
-      // Si la solicitud es exitosa, despacha la acción con los datos recibidos
-      dispatch({
-        type: GET_RELATED_POSTS_SUCCESS,
-        payload: res.data.posts, // Asegúrate de que la API devuelve un array de posts en `res.data.posts`
-      });
-    } else {
-      // Si la solicitud falla, despacha la acción de fallo
+      if (res.status === 200) {
+        // Si la solicitud es exitosa, despacha la acción con los datos recibidos
+        dispatch({
+          type: GET_RELATED_POSTS_SUCCESS,
+          payload: res.data.posts, // Asegúrate de que la API devuelve un array de posts en `res.data.posts`
+        });
+      } else {
+        // Si la solicitud falla, despacha la acción de fallo
+        dispatch({
+          type: GET_RELATED_POSTS_FAIL,
+        });
+      }
+    } catch (err) {
+      // Maneja cualquier error que ocurra durante la solicitud
       dispatch({
         type: GET_RELATED_POSTS_FAIL,
       });
     }
-  } catch (err) {
-    // Maneja cualquier error que ocurra durante la solicitud
-    dispatch({
-      type: GET_RELATED_POSTS_FAIL,
-    });
-  }
-};
+  };
 
 export const get_blog_list_category_page = (slug, page) => async (dispatch) => {
   const config = {

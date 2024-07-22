@@ -23,5 +23,8 @@
 @import "./css/notice/Notices.css";
 @import "./css/notice/Categories.css";
 @import "./css/notice/Details.css";
+@import "./css/notice/RelatedPost.css";
+
+/* utils */
 @import "./css/LoadingSpinner.css";
 @import "./css/error.css";

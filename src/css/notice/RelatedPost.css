@@ -1,0 +1,63 @@
+/* src/components/RelatedPost/RelatedPost.css */
+.related-posts {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.related-posts h2 {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+}
+
+.related-post-card {
+  flex: 1 1 calc(33.333% - 1rem);
+  max-width: calc(33.333% - 1rem);
+  margin-bottom: 1rem;
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.related-post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.related-post-thumbnail {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.related-post-card-body {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+}
+
+.related-post-card-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .related-post-card {
+    flex: 1 1 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 576px) {
+  .related-post-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}

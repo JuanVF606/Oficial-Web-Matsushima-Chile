@@ -1,74 +1,85 @@
+// src/components/RelatedPost/RelatedPost.js
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { get_related_post } from "../../redux/actions/blog/blog";
 import { Link } from "react-router-dom";
-import defaultThumbnail from "../../assets/img/Hero_Dojos.jpg";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Card } from "react-bootstrap";
+import PropTypes from "prop-types";
+import defaultThumbnail from "../../assets/img/logo.jpg";
+import { fetchRelatedPosts } from "../../services/api";
 
-const RelatedPost = ({ categorySlug, currentPostSlug, get_related_post }) => {
+const RelatedPost = ({ categorySlug, currentPostSlug }) => {
   const [relatedPosts, setRelatedPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchRelatedPosts = async () => {
-      setLoading(true);
+    const getRelatedPosts = async () => {
       try {
-        const response = await get_related_post(categorySlug, currentPostSlug);
-        setRelatedPosts(response.posts || []);
-      } catch (error) {
-        console.error("Error fetching related posts:", error);
+        setLoading(true);
+        const posts = await fetchRelatedPosts(categorySlug, currentPostSlug);
+        setRelatedPosts(posts);
+      } catch (err) {
+        setError("No se pudieron cargar los posts relacionados.");
       } finally {
         setLoading(false);
       }
     };
 
-    if (categorySlug && currentPostSlug) {
-      fetchRelatedPosts();
-    }
-  }, [categorySlug, currentPostSlug, get_related_post]);
+    getRelatedPosts();
+  }, [categorySlug, currentPostSlug]);
+
+  if (loading) {
+    return (
+      <div className="text-center p-5">
+        <Spinner animation="border" variant="primary" />
+        <p>Cargando...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className="text-center text-danger">{error}</div>;
+  }
 
   return (
-    <div className="related-posts mt-5">
+    <div className="related-posts">
       <h2 className="mb-4">Posts Relacionados</h2>
-      {loading ? (
-        <div className="text-center">
-          <Spinner animation="border" variant="primary" />
-        </div>
+      {relatedPosts.length === 0 ? (
+        <p>No hay posts relacionados.</p>
       ) : (
-        <ul className="list-unstyled">
-          {relatedPosts.length > 0 ? (
-            relatedPosts.map((post) => (
-              <li key={post.id} className="mb-4">
-                <div className="card">
-                  <Link to={`/noticias/${post.slug}`}>
-                    <img
-                      src={post.thumbnail || defaultThumbnail}
-                      className="card-img-top"
-                      alt={post.title}
-                      style={{ borderRadius: "0.5rem" }}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = defaultThumbnail;
-                      }}
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">{post.title}</h5>
-                    </div>
-                  </Link>
-                </div>
-              </li>
-            ))
-          ) : (
-            <p>No hay posts relacionados.</p>
-          )}
-        </ul>
+        <div className="d-flex flex-wrap">
+          {relatedPosts.map((post) => (
+            <Card key={post.id} className="related-post-card mb-3 me-3">
+              <Link
+                to={`/noticias/${post.slug}`}
+                className="text-decoration-none"
+              >
+                <Card.Img
+                  variant="top"
+                  src={post.thumbnail || defaultThumbnail}
+                  alt={post.title}
+                  className="related-post-thumbnail rounded-0 img-fluid"
+                  onError={(e) => {
+                    e.target.src = defaultThumbnail;
+                    e.target.onError = null;
+                  }}
+                />
+                <Card.Body className="related-post-card-body">
+                  <Card.Title className="related-post-card-title">
+                    {post.title}
+                  </Card.Title>
+                </Card.Body>
+              </Link>
+            </Card>
+          ))}
+        </div>
       )}
     </div>
   );
 };
 
-const mapDispatchToProps = {
-  get_related_post,
+RelatedPost.propTypes = {
+  categorySlug: PropTypes.string.isRequired,
+  currentPostSlug: PropTypes.string.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(RelatedPost);
+export default RelatedPost;
