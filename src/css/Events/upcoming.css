@@ -1,0 +1,37 @@
+.upcoming-events-container {
+  background-color: #f0f0f0; /* Fondo claro para contraste */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  max-width: 900px; /* Ancho máximo del contenedor */
+  margin: 2rem auto; /* Centrar horizontalmente y añadir espacio vertical */
+  padding: 1rem 2rem; /* Espaciado interno */
+  display: flex; /* Flexbox para alineación */
+  justify-content: space-between; /* Espaciado entre elementos */
+  align-items: center; /* Alineación vertical */
+}
+
+.upcoming-events-title {
+  font-size: 1.75rem; /* Tamaño del texto */
+  color: #0033a0; /* Color azul oscuro (color de la bandera chilena) */
+  margin: 0; /* Eliminar márgenes por defecto */
+}
+
+.btn-primary {
+  background-color: #d52b1e; /* Color rojo (color de la bandera chilena) */
+  border-color: #d52b1e; /* Color del borde del botón */
+  color: #fff; /* Color del texto del botón */
+  text-decoration: none; /* Eliminar subrayado */
+  padding: 0.75rem 1.5rem; /* Espaciado interno */
+  border-radius: 0.25rem; /* Bordes redondeados del botón */
+  transition: background-color 0.3s, border-color 0.3s; /* Transición suave para el hover */
+}
+
+.btn-primary:hover {
+  background-color: #a02023; /* Color rojo oscuro al pasar el cursor */
+  border-color: #a02023; /* Color del borde al pasar el cursor */
+}
+
+.btn-primary:focus, .btn-primary:active {
+  outline: none; /* Eliminar el contorno por defecto en el foco */
+  box-shadow: none; /* Eliminar la sombra del botón en el foco */
+}

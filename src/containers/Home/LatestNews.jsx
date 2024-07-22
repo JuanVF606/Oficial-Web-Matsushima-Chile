@@ -25,7 +25,7 @@ const LatestNews = ({
     const fetchData = async () => {
       try {
         await get_categories();
-        await get_blog_list(2); // Cargar las últimas noticias
+        await get_blog_list(3); // Cargar las últimas noticias
       } catch (error) {
         setError("No se pudo cargar las últimas noticias");
       }

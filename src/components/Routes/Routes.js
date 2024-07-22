@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import routes from './index';
-import LoadingSpinner from '../common/LoadingSpinner';
+import LoadingSpinner from '../common/Spinner/LoadingSpinner';
 
 function Browser() {
   const location = useLocation();

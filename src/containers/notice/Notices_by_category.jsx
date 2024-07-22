@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Layout from "../../components/Layout/Layout";
-import Hero from "../../components/common/Hero";
+import Hero from "../../components/common/Hero/Hero";
 import Hero_notice from "../../assets/img/Hero_notice.jpg";
 import { get_categories } from "../../redux/actions/categories/categories";
 import {

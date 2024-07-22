@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Layout from "../Layout/Layout";
 import { connect } from "react-redux";
-import Hero from "../common/Hero";
+import Hero from "../common/Hero/Hero.jsx";
 import Categories from "./../../containers/events/Categories";
 import Activities from "../../containers/events/Activities.jsx";
 import { get_categories } from "../../redux/actions/categories/categories";

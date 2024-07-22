@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../Layout/Layout'
-import Hero from '../common/Hero'
+import Hero from '../common/Hero/Hero'
 import HeroGaleria from "../../assets/img/Hero_Galeria.jpg"
 import Gallery from '../../containers/gallery/Gallery'
 import galleryItems from './../../data/Gallery';

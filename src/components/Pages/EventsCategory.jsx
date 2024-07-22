@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import Layout from "../Layout/Layout";
-import Hero from "../common/Hero";
+import Hero from "../common/Hero/Hero";
 import Categories from "../../containers/events/Categories";
 import HeroImage from "../../assets/img/Hero_Actividades.jpg";
 import { connect } from "react-redux";

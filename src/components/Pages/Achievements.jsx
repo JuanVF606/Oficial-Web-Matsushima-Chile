@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../Layout/Layout";
-import Hero from "../common/Hero";
+import Hero from "../common/Hero/Hero";
 import HeroImage from "../../assets/img/Hero_Logros.jpg";
 const Achievements = () => {
   return (
