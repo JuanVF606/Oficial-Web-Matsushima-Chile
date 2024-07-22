@@ -5,10 +5,9 @@ import {
   get_blog_list_page,
 } from "./../../redux/actions/blog/blog";
 import { get_categories } from "./../../redux/actions/categories/categories";
-import { CalendarIcon } from "@heroicons/react/24/solid";
 import moment from "moment";
 import logo from "../../assets/img/logo.jpg";
-moment.locale("es");
+moment.locale("es-es");
 
 
 const LatestNews = ({
@@ -43,25 +42,11 @@ const LatestNews = ({
           className="card-img-top"
           alt={news.title}
         />
-        <p className="card-text">
-          <small className="text-muted">
-            <CalendarIcon
-              style={{ height: "20px", width: "20px" }}
-              className="text-gray-400"
-              aria-hidden="true"
-            />
-            {moment(news.date).format("DD [de] MMMM [del] YYYY")}
-          </small>
-        </p>
+        
         <div className="card-body">
           <h5 className="card-title">{news.title}</h5>
           <p className="card-text">{news.description.length > 100 ? `${news.description.slice(0, 90)}...` : news.description}</p>
-          <p className="card-text">
-            <small className="text-muted">
-              <i className="far fa-calendar-alt"></i> {news.date}
-            </small>
-          </p>
-          <a href={news.link} className="btn btn-primary">
+          <a href={`/noticias/${news.slug}`} className="btn btn-primary">
             Leer más <i className="fas fa-arrow-right"></i>
           </a>
         </div>

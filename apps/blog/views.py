@@ -105,7 +105,16 @@ class PostDetailView(APIView):
         else:
             return Response({'error':'Post doesnt exist'}, status=status.HTTP_404_NOT_FOUND)
 
+class lastPostView(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def get(self, request, format=None):
+        if Post.objects.all().exists():
+            post = Post.objects.latest('published')
+            serializer = PostSerializer(post)
 
+            return Response({'post':serializer.data})
+        else:
+            return Response({'error':'No posts found'}, status=status.HTTP_404_NOT_FOUND)
 class SearchBlogView(APIView):
     permission_classes = (permissions.AllowAny,)
     def get(self,request, format=None):

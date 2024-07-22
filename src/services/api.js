@@ -25,3 +25,18 @@ export const fetchRelatedPosts = async (categorySlug, currentPostSlug) => {
     throw err;
   }
 };
+
+export const lastPosts = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/blog/last_post`);
+
+    if (response.status === 200) {
+      return response.data.results?.posts || [];
+    } else {
+      throw new Error('No se pudieron cargar los últimos posts.');
+    }
+  } catch (err) {
+    console.error('Error fetching last posts:', err);
+    throw err;
+  }
+}
