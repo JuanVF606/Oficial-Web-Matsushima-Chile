@@ -1,0 +1,72 @@
+.BDMatsushima {
+  padding: 1.5rem 1rem;
+  background-color: #f5f5f5; /* Fondo gris claro para contrastar con los colores de la bandera */
+}
+
+.BDMatsushima .card {
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.BDMatsushima .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.BDMatsushima .card-img-block {
+  position: relative;
+  height: 150px; /* Altura ajustada para imágenes de caras */
+  overflow: hidden;
+  border-radius: 50%; /* Bordes redondeados para un estilo de cara */
+  margin: 0 auto; /* Centra la imagen */
+  border: 5px solid #0033a0; /* Borde azul similar al de la bandera chilena */
+}
+
+.BDMatsushima .card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Mantiene la proporción de la imagen */
+  border-radius: 50%; /* Bordes redondeados para la imagen */
+}
+
+.BDMatsushima .card-body {
+  padding: 1rem;
+  background-color: #fff; /* Fondo blanco para el contenido */
+  border-top: 2px solid #ff0000; /* Borde superior rojo para resaltar el contenido */
+}
+
+.BDMatsushima .card-title {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  color: #0033a0; /* Color del texto en azul para coincidir con el borde */
+  text-align: center; /* Centra el texto del título */
+}
+
+.skeleton-loading {
+  background: linear-gradient(90deg, #e0e0e0 25%, #c0c0c0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.2s infinite;
+  border-radius: 50%; /* Bordes redondeados para el esqueleto de carga */
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .BDMatsushima .card-title {
+    font-size: 1rem;
+  }
+
+  .BDMatsushima .card-img-block {
+    height: 120px;
+  }
+}

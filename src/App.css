@@ -11,6 +11,7 @@
 /* About */
 @import "./css/About/About.css";
 @import "./css/About/Tree.css";
+@import "./css/About/Team.css";
 /* Events */
 @import "./css/Events/Cards.css";
 @import "./css/Events/upcoming.css";

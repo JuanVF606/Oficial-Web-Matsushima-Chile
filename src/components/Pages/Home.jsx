@@ -7,33 +7,29 @@ import UpcomingEvents from "../../containers/Home/UpcomingEvents";
 import Achievements from "../../containers/Home/Achievements";
 import Gallery from "../../containers/Home/Gallery";
 import ContactAndSocial from "../../containers/Home/ContactAndSocial";
-import SuccessStories from "../../containers/Home/SuccessStories";
-import { Button } from "react-bootstrap";
+import Banner from "../common/Banners/Banner";
 
 const Home = () => {
   return (
     <Layout>
       <Hero />
-
-      <Team />
+ 
+      <Team title={" Conoce a nuestros  Directores de IKO Matsushima Chile"} />
 
       <UpcomingEvents />
 
-      <SuccessStories />
 
       <Achievements />
 
       <Gallery />
 
-      <section className="cta-container py-5 text-center">
-        <h2 className="mb-4">¡Se parte de la organización!</h2>
-        <p className="mb-4">
-          Participa en nuestras clases y eventos. ¡Estamos esperando por ti!
-        </p>
-        <Button href="/signup" variant="primary">
-          Unete Ahora
-        </Button>
-      </section>
+      <Banner 
+        title="Entrena con nosotros"
+        description="¡Busca tu Dojo más cercano y comienza a entrenar con nosotros!"
+        href="/nuestros-dojos"
+        action="Encuentra tu Dojo
+        "
+      />
 
       <LatestNews />
 

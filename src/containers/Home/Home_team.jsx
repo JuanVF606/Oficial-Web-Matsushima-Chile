@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { get_dojos } from "../../redux/actions/dojos/dojos";
 import logo from "../../assets/img/logo.jpg";
-const NationalDirectors = ({ get_dojos, dojos }) => {
+const NationalDirectors = ({ get_dojos, dojos, title }) => {
   const [error, setError] = useState(null);
 
   // Asegúrate de que dojos esté definido antes de usarlo
@@ -33,7 +33,7 @@ const NationalDirectors = ({ get_dojos, dojos }) => {
         <Row className="align-items-center">
           <Col md={12} lg={12} className="text-md-start mb-4">
             <h2 className="display-5 mb-4 text-primary fw-bold">
-              Conoce a Nuestros Directores
+             {title}
             </h2>
           </Col>
           <Col md={12}>
