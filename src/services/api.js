@@ -40,3 +40,107 @@ export const lastPosts = async () => {
     throw err;
   }
 }
+
+// Obtener la lista de categorías
+export const fetchCategories = async () => {
+  const response = await fetch(`${API_BASE_URL}/categories/`);
+  if (!response.ok) {
+    throw new Error('Error fetching categories');
+  }
+  return response.json();
+};
+
+// Obtener la lista de galerías
+export const fetchGalleries = async () => {
+  const response = await fetch(`${API_BASE_URL}/gallery/galleries/`);
+  if (!response.ok) {
+    throw new Error('Error fetching galleries');
+  }
+  return response.json();
+};
+
+// Obtener detalles de una galería específica
+export const fetchGalleryDetails = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/galleries/${id}/`);
+  if (!response.ok) {
+    throw new Error('Error fetching gallery details');
+  }
+  return response.json();
+};
+
+// Obtener ítems de media de una galería específica
+export const fetchGalleryMediaItems = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/gallery/galleries/${id}/media-items/`);
+  if (!response.ok) {
+    throw new Error('Error fetching gallery media items');
+  }
+  return response.json();
+};
+
+// Obtener la lista de ítems de media
+export const fetchMediaItems = async () => {
+  const response = await fetch(`${API_BASE_URL}/media-items/`);
+  if (!response.ok) {
+    throw new Error('Error fetching media items');
+  }
+  return response.json();
+};
+
+// Obtener detalles de un ítem de media específico
+export const fetchMediaItemDetails = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/media-items/${id}/`);
+  if (!response.ok) {
+    throw new Error('Error fetching media item details');
+  }
+  return response.json();
+};
+
+// Obtener comentarios de un ítem de media específico
+export const fetchMediaItemComments = async (mediaId) => {
+  const response = await fetch(`${API_BASE_URL}/media-items/${mediaId}/comments/`);
+  if (!response.ok) {
+    throw new Error('Error fetching media item comments');
+  }
+  return response.json();
+};
+
+// Añadir un nuevo comentario a un ítem de media
+export const postMediaItemComment = async (mediaId, commentData) => {
+  const response = await fetch(`${API_BASE_URL}/media-items/${mediaId}/comments/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(commentData),
+  });
+  if (!response.ok) {
+    throw new Error('Error posting comment');
+  }
+  return response.json();
+};
+
+// Obtener la lista de comentarios
+export const fetchComments = async () => {
+  const response = await fetch(`${API_BASE_URL}/comments/`);
+  if (!response.ok) {
+    throw new Error('Error fetching comments');
+  }
+  return response.json();
+};
+
+// Obtener la lista de etiquetas (tags)
+export const fetchTags = async () => {
+  const response = await fetch(`${API_BASE_URL}/tags/`);
+  if (!response.ok) {
+    throw new Error('Error fetching tags');
+  }
+  return response.json();
+};
+
+export const fetchGalleryById = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/galleries/${id}/`);
+  if (!response.ok) {
+    throw new Error('Error fetching gallery');
+  }
+  return response.json();
+}

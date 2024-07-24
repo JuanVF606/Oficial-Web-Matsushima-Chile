@@ -1,57 +1,66 @@
-from django.db import models
-from apps.category.models import Category
-import uuid
 from django.conf import settings
-User = settings.AUTH_USER_MODEL
-
+from django.db import models
+from django.utils import timezone
+from apps.category.models import Category
+from django.utils.text import slugify
 
 def blog_thumbnail_directory(instance, filename):
-    return 'gallery/{0}/{1}'.format(instance.title, filename)
+    return 'Gallery/{0}/{1}'.format(instance.name, filename)
 
-
-
-class AdditionalItem(models.Model):
-    gallery = models.ForeignKey('Gallery', on_delete=models.CASCADE, related_name='additional_items')
-    title = models.CharField(max_length=255)
-    thumbnail = models.ImageField(upload_to=blog_thumbnail_directory, blank=True, null=True)
-    thumbnail2 = models.ImageField(upload_to=blog_thumbnail_directory, blank=True, null=True)
-    thumbnail3 = models.ImageField(upload_to=blog_thumbnail_directory, blank=True, null=True)
-    thumbnail4 = models.ImageField(upload_to=blog_thumbnail_directory, blank=True, null=True)
-    thumbnail5 = models.ImageField(upload_to=blog_thumbnail_directory, blank=True, null=True)
-    url = models.URLField(max_length=255)
-    def __str__(self):
-        return self.url
-
-# Modelo principal de la galería
 class Gallery(models.Model):
-    class PostObjects(models.Manager):
-        def get_queryset(self):
-            return super().get_queryset().filter(status='published')
-
-    options = (
-        ('draft', 'Draft'),
-        ('published', 'Published'),
-    )
-
-    title = models.CharField(max_length=255)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    slug = models.SlugField(max_length=255, unique=True, default=uuid.uuid4, editable=False)
-    thumbnail = models.ImageField(upload_to=blog_thumbnail_directory, blank=True, null=True)
-    video = models.URLField(max_length=255, blank=True, null=True)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, blank=True, null=True)
-    date = models.DateTimeField(auto_now_add=True)
-    published = models.DateTimeField(auto_now_add=True)
-    instructor_a_cargo = models.CharField(max_length=255, blank=True, null=True)
-    status = models.CharField(max_length=10, choices=options, default='draft')
-    link_drive = models.URLField(max_length=255, blank=True, null=True)
-    objects = models.Manager()  # default manager
-    postobjects = PostObjects()  # custom manager
-
-    class Meta:
-        ordering = ('-published',)
-
+    name = models.CharField(max_length=255)
+    thumbnail = models.ImageField(upload_to=blog_thumbnail_directory, blank=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
+    description = models.TextField(blank=True, null=True)
+    categories = models.ManyToManyField(Category, related_name='galleries', blank=True)
+    tags = models.ManyToManyField('Tag', related_name='galleries', blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name='galleries_created')
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+    
     def __str__(self):
-        return self.title + ' | ' + str(self.author) + ' | ' + str(self.published)
+        return self.name
 
-    def get_status(self):
-        return self.status
+class MediaItem(models.Model):
+    MEDIA_TYPE_CHOICES = [
+        ('image', 'Image'),
+        ('video', 'Video'),
+    ]
+    
+    gallery = models.ForeignKey(Gallery, related_name='media_items', on_delete=models.CASCADE)
+    media_type = models.CharField(max_length=10, choices=MEDIA_TYPE_CHOICES)
+    file = models.FileField(upload_to='media/')
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    uploaded_at = models.DateTimeField(default=timezone.now)
+    views = models.PositiveIntegerField(default=0)
+    tags = models.ManyToManyField('Tag', related_name='media_items', blank=True)
+    
+    def __str__(self):
+        return f"{self.title} ({self.media_type})"
+    
+    class Meta:
+        ordering = ['-uploaded_at']
+
+class Comment(models.Model):
+    media_item = models.ForeignKey(MediaItem, related_name='comments', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+    content = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return f"Comment by {self.user} on {self.media_item.title}"
+    
+    class Meta:
+        ordering = ['created_at']
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    
+    def __str__(self):
+        return self.name

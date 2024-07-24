@@ -1,62 +1,124 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { get_gallery_list } from '../../redux/actions/gallery/gallery';
-import { Container, Row, Col, Card, Button, Modal, Carousel } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { fetchGalleries, fetchGalleryMediaItems } from "../../services/api";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Modal,
+  Carousel,
+  Button,
+} from "react-bootstrap";
 
-const Gallery = ({ galleryData, get_gallery_list }) => {
+const Gallery = () => {
+  const [galleries, setGalleries] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
+  const [mediaItems, setMediaItems] = useState([]);
+  const [selectedMediaItem, setSelectedMediaItem] = useState(null);
 
   useEffect(() => {
-    get_gallery_list();
-  }, [get_gallery_list]);
+    const fetchGalleryData = async () => {
+      try {
+        const data = await fetchGalleries();
+        setGalleries(data);
+      } catch (error) {
+        setError("Error fetching galleries.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleShowModal = (item) => {
-    setModalContent(item);
+    fetchGalleryData();
+  }, []);
+
+  const handleShowModal = async (gallery) => {
+    try {
+      setModalContent(gallery);
+      setSelectedMediaItem(null);
+
+      // Fetch media items for the gallery
+      const items = await fetchGalleryMediaItems(gallery.id);
+      setMediaItems(items);
+    } catch (error) {
+      setError("Error fetching gallery media items.");
+    }
+
     setShowModal(true);
   };
 
-  const handleCloseModal = () => setShowModal(false);
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setModalContent(null);
+    setMediaItems([]);
+  };
 
-  // Validate if galleryData and galleries are present and is an array
-  const galleries = Array.isArray(galleryData?.galleries) ? galleryData.galleries : [];
+  const handleMediaClick = (mediaItem) => {
+    setSelectedMediaItem(mediaItem);
+  };
+
+  const handleFullscreenToggle = () => {
+    if (!selectedMediaItem) return;
+    const videoElement = document.getElementById(
+      `video-${selectedMediaItem.id}`
+    );
+    if (videoElement) {
+      if (videoElement.requestFullscreen) {
+        videoElement.requestFullscreen();
+      } else if (videoElement.mozRequestFullScreen) {
+        /* Firefox */
+        videoElement.mozRequestFullScreen();
+      } else if (videoElement.webkitRequestFullscreen) {
+        /* Chrome, Safari & Opera */
+        videoElement.webkitRequestFullscreen();
+      } else if (videoElement.msRequestFullscreen) {
+        /* IE/Edge */
+        videoElement.msRequestFullscreen();
+      }
+    }
+  };
+
+  const truncateDescription = (description) => {
+    if (!description) return '';
+    return description.length > 30
+      ? description.slice(0, 30) + "..."
+      : description;
+  };
 
   return (
     <Container className="py-5">
-      <h2 className="text-center mb-4">Revive nuestros Momentos</h2>
-      {galleryData.loading ? (
-        <p>Loading...</p>
-      ) : galleryData.error ? (
-        <p>{galleryData.error}</p>
+      {loading ? (
+        <p className="text-center">Loading...</p>
+      ) : error ? (
+        <p className="text-center text-danger">{error}</p>
       ) : (
         <Row>
-          {galleries.map((item) => (
-            <Col xs={12} sm={6} md={4} lg={3} key={item.id} className="mb-4">
-              <Card className="gallery-card">
-                {item.additional_items.length > 0 && item.additional_items[0].is_video ? (
-                  <video className="card-img-top" controls>
-                    <source src={item.additional_items[0].url} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                ) : (
-                  <img
-                    src={item.thumbnail}
-                    className="card-img-top"
-                    alt={item.title}
-                    onClick={() => handleShowModal(item)}
-                    style={{ cursor: 'pointer' }}
-                    loading='lazy-loading'
-                  />
-                )}
+          {galleries.map((gallery) => (
+            <Col xs={12} sm={6} md={4} lg={3} key={gallery.id} className="mb-4">
+              <Card
+                className="gallery-card"
+                onClick={() => handleShowModal(gallery)}
+                style={{ cursor: "pointer" }}
+              >
+                <Card.Img
+                  src={gallery.thumbnail || "https://via.placeholder.com/300"}
+                  className="card-img-top gallery-media"
+                  alt={gallery.name}
+                  loading="lazy"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://via.placeholder.com/300x200";
+                  }}
+                />
                 <Card.Body>
-                  <Card.Title>{item.title}</Card.Title>
-                  <Card.Text>{item.description}</Card.Text>
-                  <Button
-                    variant="primary"
-                    onClick={() => handleShowModal(item)}
-                  >
-                    Ver {item?.additional_items.length > 0 && item.additional_items[0].is_video ? 'Video' : 'Más'}
-                  </Button>
+                  <Card.Title className="gallery-card-title">
+                    {gallery.name}
+                  </Card.Title>
+                  <Card.Text className="gallery-card-description">
+                    {truncateDescription(gallery.description)}
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -65,28 +127,56 @@ const Gallery = ({ galleryData, get_gallery_list }) => {
       )}
 
       {modalContent && (
-        <Modal show={showModal} onHide={handleCloseModal} size="lg" centered>
+        <Modal
+          show={showModal}
+          onHide={handleCloseModal}
+          size="lg"
+          centered
+          dialogClassName="modal-90w"
+        >
           <Modal.Header closeButton>
-            <Modal.Title>{modalContent.title}</Modal.Title>
+            <Modal.Title className="modal-title">
+              {modalContent.name}
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {modalContent.additional_items.length > 0 && modalContent.additional_items[0].is_video ? (
-              <video className="w-100" controls>
-                <source src={modalContent.additional_items[0].url} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            ) : (
-              <Carousel>
-                {modalContent.additional_items.map((item, index) => (
-                  <Carousel.Item key={index}>
-                    <img
-                      className="d-block w-100"
-                      src={item.url}
-                      alt={`Imagen ${index + 1}`}
-                    />
+            <p className="modal-description-text">{modalContent.description}</p>
+            {mediaItems.length > 0 ? (
+              <Carousel indicators={false} controls={true}>
+                {mediaItems.map((item, index) => (
+                  <Carousel.Item
+                    key={index}
+                    onClick={() => handleMediaClick(item)}
+                  >
+                    {item.media_type === "video" ? (
+                      <div className="video-wrapper">
+                        <video
+                          id={`video-${item.id}`}
+                          className="d-block w-100 modal-media"
+                          controls
+                        >
+                          <source src={item.file} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                        <Button
+                          className="fullscreen-btn"
+                          onClick={handleFullscreenToggle}
+                        >
+                          Pantalla Completa
+                        </Button>
+                      </div>
+                    ) : (
+                      <img
+                        className="d-block w-100 modal-media"
+                        src={item.file}
+                        alt={`Imagen ${index + 1}`}
+                      />
+                    )}
                   </Carousel.Item>
                 ))}
               </Carousel>
+            ) : (
+              <p className="text-center">No media items available.</p>
             )}
           </Modal.Body>
         </Modal>
@@ -95,12 +185,4 @@ const Gallery = ({ galleryData, get_gallery_list }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  galleryData: state.gallery,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  get_gallery_list: () => dispatch(get_gallery_list()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Gallery);
+export default Gallery;

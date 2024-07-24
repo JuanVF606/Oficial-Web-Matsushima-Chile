@@ -1,18 +1,32 @@
 from rest_framework import serializers
-from .models import *
-from apps.category.serializers import CategorySerializer
-class AdditionalItemSerializer(serializers.ModelSerializer):
+from .models import Category, Gallery, MediaItem, Comment, Tag
+
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = AdditionalItem
-        fields = ('url', 'is_video')
+        model = Category
+        fields = '__all__'
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = '__all__'
 
 class GallerySerializer(serializers.ModelSerializer):
-    additional_items = AdditionalItemSerializer(many=True, read_only=True)
+    categories = CategorySerializer(many=True, read_only=True)
+    tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
         model = Gallery
-        fields = (
-            'id', 'title', 'author', 'slug', 'thumbnail', 'category',
-            'date', 'published', 'instructor_a_cargo', 'status', 'link_drive',
-            'additional_items'
-        )
+        fields = '__all__'
+
+class MediaItemSerializer(serializers.ModelSerializer):
+    tags = TagSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = MediaItem
+        fields = '__all__'
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = '__all__'
