@@ -16,13 +16,16 @@ const Home = () => {
  
       <Team title={" Conoce a nuestros  Directores de IKO Matsushima Chile"} />
 
+      <Achievements />
+
+
       <UpcomingEvents />
 
 
-      <Achievements />
 
-      <Gallery />
 
+
+      <LatestNews />
       <Banner 
         title="Entrena con nosotros"
         description="¡Busca tu Dojo más cercano y comienza a entrenar con nosotros!"
@@ -30,8 +33,6 @@ const Home = () => {
         action="Encuentra tu Dojo
         "
       />
-
-      <LatestNews />
 
       <ContactAndSocial />
     </Layout>

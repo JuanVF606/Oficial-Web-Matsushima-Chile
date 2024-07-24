@@ -1,45 +1,183 @@
-/* styles.css */
-
-.gallery-card {
-  border: none;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s ease-in-out;
+/* Contenedor principal de la galería */
+.gallery-container {
   background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 0.75rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Título de la galería */
+.gallery-title {
+  color: #0033a0; /* Azul de la bandera chilena */
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
+/* Tarjeta de la galería */
+.gallery-card {
+  border: 1px solid #ddd;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+/* Efecto al pasar el ratón sobre la tarjeta */
 .gallery-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen o video en la tarjeta */
+.gallery-media {
+  border-bottom: 1px solid #ddd;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Título dentro de la tarjeta */
+.gallery-card-title {
+  font-size: 1.5rem;
+  color: #0033a0;
+  margin: 0.75rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Descripción dentro de la tarjeta */
+.gallery-card-description {
+  color: #666;
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+/* Estilos para el modal */
+.modal-title {
+  font-weight: 700;
+  color: #0033a0;
+}
+
+.modal-description-title {
+  font-weight: 600;
+  color: #0033a0;
+  margin-bottom: 0.5rem;
+}
+
+.modal-description-text {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+/* Imagen o video dentro del modal */
+.modal-media {
+  border-radius: 0.75rem;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Contenedor de los comentarios */
+.comment-item {
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: #fff;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón de pantalla completa */
+.fullscreen-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #e4002b; /* Rojo de la bandera chilena */
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  z-index: 1; /* Asegura que esté por encima del video */
+}
+
+/* Efecto al pasar el ratón sobre el botón */
+.fullscreen-btn:hover {
+  background-color: #c70039;
   transform: scale(1.05);
 }
 
-.gallery-card .card-img-top {
-  height: 200px;
-  object-fit: cover;
-}
-
-.gallery-card .card-body {
-  padding: 20px;
-  text-align: center;
-}
-
-.gallery-card .btn {
+/* Contenedor del video dentro del modal */
+.video-wrapper {
+  position: relative;
   width: 100%;
+  height: auto;
 }
 
-.modal-header {
-  border-bottom: none;
+/* Media Queries para Responsividad */
+@media (max-width: 1200px) {
+  .gallery-container {
+    padding: 1.5rem;
+  }
 }
 
-.modal-body {
-  padding: 0;
+@media (max-width: 992px) {
+  .gallery-card {
+    margin-bottom: 1rem;
+  }
+
+  .gallery-card-title {
+    font-size: 1.25rem;
+  }
+
+  .gallery-card-description {
+    font-size: 0.875rem;
+  }
 }
 
-.carousel-item img {
-  height: 500px;
-  object-fit: cover;
+@media (max-width: 768px) {
+  .gallery-container {
+    padding: 1rem;
+  }
+
+  .gallery-card-title {
+    font-size: 1rem;
+  }
+
+  .gallery-card-description {
+    font-size: 0.75rem;
+  }
+
+  .fullscreen-btn {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+  }
 }
 
-.carousel-indicators [data-bs-target] {
-  background-color: #000;
+@media (max-width: 576px) {
+  .gallery-title {
+    font-size: 1.5rem;
+  }
+
+  .gallery-card-title {
+    font-size: 0.875rem;
+  }
+
+  .gallery-card-description {
+    font-size: 0.65rem;
+  }
+
+  .fullscreen-btn {
+    font-size: 0.625rem;
+    padding: 0.5rem;
+  }
 }

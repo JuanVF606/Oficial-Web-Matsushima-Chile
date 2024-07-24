@@ -14,7 +14,7 @@ const ContactAndSocial = () => {
 
     if (name && email && message) {
       // Crear el enlace mailto con los campos del formulario
-      const mailtoLink = `mailto:info@ikomatsushima.cl?subject=Contacto desde IKO Matsushima&body=Nombre: ${name}%0D%0ACorreo Electrónico: ${email}%0D%0AMensaje: ${message}`;
+      const mailtoLink = `mailto:info@ikomatsushima.cl?subject=Solicito más informacion&body=Nombre: ${name}%0D%0ACorreo Electrónico: ${email}%0D%0AMensaje: ${message}`;
       window.location.href = mailtoLink;
     } else {
       alert('Por favor, completa todos los campos.');
@@ -49,23 +49,16 @@ const ContactAndSocial = () => {
 
           {/* Sección de Redes Sociales */}
           <Col md={12} lg={6}>
-            <h2 className="text-center mb-4 text-primary">Síguenos en Redes Sociales</h2>
+            <h2 className="text-center mb-4 text-primary">Síguenos en  nuestras redes Sociales</h2>
             <div className="d-flex flex-column flex-md-row justify-content-center gap-4">
               <a href="https://facebook.com/IKO_Matsushima" className="social-icon" target="_blank" rel="noopener noreferrer">
                 <FaFacebookF />
-                <span className="social-text">Facebook</span>
               </a>
               <a href="https://instagram.com/IKO_Matsushima" className="social-icon" target="_blank" rel="noopener noreferrer">
                 <FaInstagram />
-                <span className="social-text">Instagram</span>
               </a>
               <a href="https://twitter.com/IKO_Matsushima" className="social-icon" target="_blank" rel="noopener noreferrer">
                 <FaXTwitter />
-                <span className="social-text">Twitter</span>
-              </a>
-              <a href="mailto:info@ikomatsushima.cl" className="social-icon" target="_blank" rel="noopener noreferrer">
-                <FaEnvelope />
-                <span className="social-text">Email</span>
               </a>
             </div>
           </Col>
