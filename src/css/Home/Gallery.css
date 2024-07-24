@@ -33,11 +33,12 @@
 
 /* Imagen o video en la tarjeta */
 .gallery-media {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #d60303;
   border-top-left-radius: 0.75rem;
   border-top-right-radius: 0.75rem;
   width: 100%;
   height: auto;
+  object-fit: cover;
 }
 
 /* Título dentro de la tarjeta */
@@ -61,17 +62,28 @@
 .modal-title {
   font-weight: 700;
   color: #0033a0;
+  align-items: center;
+  text-align: center;
+  /* centrar text */
+  text-shadow: #d60303;
 }
 
 .modal-description-title {
   font-weight: 600;
   color: #0033a0;
   margin-bottom: 0.5rem;
+  text-align: center;
 }
 
 .modal-description-text {
-  color: #666;
-  margin-bottom: 1rem;
+  color: #333; /* Color oscuro para una mejor legibilidad */
+  font-size: 1rem; /* Tamaño de fuente adecuado para la lectura */
+  line-height: 1.6; /* Espaciado entre líneas para mayor claridad */
+  margin-bottom: 1rem; /* Espacio debajo del texto */
+  padding: 0.5rem 1rem; /* Espaciado interno para evitar que el texto toque los bordes */
+  background-color: #f9f9f9; /* Fondo gris claro para contraste suave con el texto */
+  border-radius: 0.5rem; /* Bordes redondeados para un aspecto más suave */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera para mejorar el contraste con el fondo */
 }
 
 /* Imagen o video dentro del modal */
@@ -79,17 +91,10 @@
   border-radius: 0.75rem;
   width: 100%;
   height: auto;
+  object-fit: cover;
 }
 
-/* Contenedor de los comentarios */
-.comment-item {
-  border: 1px solid #ddd;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  background-color: #fff;
-  margin-bottom: 0.75rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+
 
 /* Botón de pantalla completa */
 .fullscreen-btn {
@@ -104,13 +109,14 @@
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
   z-index: 1; /* Asegura que esté por encima del video */
 }
 
 /* Efecto al pasar el ratón sobre el botón */
 .fullscreen-btn:hover {
   background-color: #c70039;
+  transform: scale(1.05);
 }
 
 /* Contenedor del video dentro del modal */
