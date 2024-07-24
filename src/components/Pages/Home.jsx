@@ -5,7 +5,6 @@ import Team from "../../containers/Home/Home_team";
 import LatestNews from "../../containers/Home/LatestNews";
 import UpcomingEvents from "../../containers/Home/UpcomingEvents";
 import Achievements from "../../containers/Home/Achievements";
-import Gallery from "../../containers/Home/Gallery";
 import ContactAndSocial from "../../containers/Home/ContactAndSocial";
 import Banner from "../common/Banners/Banner";
 

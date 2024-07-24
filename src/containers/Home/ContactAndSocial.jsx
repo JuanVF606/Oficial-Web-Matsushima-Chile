@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { FaFacebookF, FaInstagram, FaEnvelope } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { FaXTwitter } from "react-icons/fa6";
 
 
