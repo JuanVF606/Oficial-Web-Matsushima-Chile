@@ -11,7 +11,6 @@ const ErrorPage = lazy(() => import("../Pages/error/ErrorPage.jsx"));
 const Galeria = lazy(() => import("../Pages/Galeria.jsx"));
 const NbyCat = lazy(() => import("../../containers/notice/Notices_by_category.jsx"));
 const Details = lazy(() => import("../../containers/notice/Details.jsx"));
-const GaleriaDetails = lazy(() => import("../../containers/gallery/GaleriaDetails.jsx"));
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -24,8 +23,7 @@ const routes = [
   { path: "/nuestros-dojos", element: <OurDojos /> },
   { path: "/noticias/logros-y-reconocimiento", element: <Achievements /> },
   { path: "/galeria", element: <Galeria /> },
-  {path: "/galeria/:id", element: <GaleriaDetails />},
-  { path: "*", element: <ErrorPage /> }
+  { path: "/*", element: <ErrorPage /> }
 ];
 
 export default routes;
