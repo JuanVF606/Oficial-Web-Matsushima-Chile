@@ -3,7 +3,24 @@
 .navbar {
   background: linear-gradient(to bottom, #f8f9fa, #e0e0e0); /* Degradado de gris */
   border-bottom: 2px solid #d0d0d0; /* Borde inferior gris claro */
-  transition: all 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out, top 0.3s ease-in-out;
+  position: relative;
+  will-change: transform; /* Mejora el rendimiento de la transición */
+}
+
+.navbar.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle un efecto flotante */
+  transition: transform 0.3s ease-in-out; /* Transición más natural */
+  transform: translateY(0); /* Asegura que la posición sea correcta */
+}
+
+.navbar-hidden {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out; /* Transición más natural */
 }
 
 .navbar-brand {

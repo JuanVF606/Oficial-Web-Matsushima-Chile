@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../../assets/img/MatsushimaChile-Logo.png"; // Asegúrate de tener el logo en tu directorio de imágenes
 
@@ -13,9 +13,26 @@ const links = [
 
 const Navbar = () => {
   const location = useLocation();
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light">
+    <nav className={`navbar navbar-expand-lg navbar-light ${isSticky ? "sticky" : ""}`}>
       <div className="container">
         <Link className="navbar-brand" to="/">
           <img src={logo} alt="IKO Matsushima Chile" className="karate-logo" />
