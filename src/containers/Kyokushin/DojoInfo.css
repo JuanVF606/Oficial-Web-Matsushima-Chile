@@ -1,0 +1,156 @@
+/* Base styling */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dojo-info-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.dojo-kun-image {
+  width: 100%;
+  height: auto; /* Mantiene la proporción de la imagen */
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.dojo-kun-text h4 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: red;
+}
+
+.dojo-kun-text p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.dojo-kun-text span * {
+  font-weight: bold;
+  color: #333;
+}
+
+.header {
+  text-align: center;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.subheader {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.dojo-info-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dojo-info-section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dojo-info-image {
+  width: 100%;
+  height: auto; /* Mantiene la proporción de la imagen */
+  object-fit: cover;
+  border-radius: 8px;
+  max-height: 300px; /* Limita la altura máxima de la imagen */
+  margin-bottom: 20px;
+}
+
+.dojo-info-text {
+  margin-top: 20px;
+}
+
+.dojo-info-paragraph {
+  margin: 15px 0;
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+.dojo-rules {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.dojo-rule {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dojo-rule-image {
+  width: 100%;
+  height: auto; /* Mantiene la proporción de la imagen */
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.dojo-rule-text {
+  margin: 0;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+  .dojo-info-layout {
+    flex-direction: row;
+  }
+
+  .dojo-info-section {
+    padding: 30px;
+  }
+
+  .header {
+    font-size: 2.5rem;
+  }
+
+  .subheader {
+    font-size: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dojo-info-layout {
+    gap: 40px;
+  }
+
+  .dojo-info-section {
+    padding: 40px;
+  }
+
+  .header {
+    font-size: 3rem;
+  }
+
+  .subheader {
+    font-size: 2rem;
+  }
+}

@@ -81,6 +81,7 @@
   width: 100%;
   height: auto;
   object-fit: cover;
+  max-height: 80vh; /* Altura máxima para asegurar que las imágenes no sean demasiado altas */
 }
 
 /* Contenedor de los comentarios */
@@ -98,7 +99,6 @@
   position: absolute;
   bottom: 10px;
   left: 50%;
-  transform: translateX(-50%);
   background-color: #e4002b; /* Rojo de la bandera chilena */
   color: white;
   border: none;
@@ -108,12 +108,13 @@
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
   z-index: 1; /* Asegura que esté por encima del video */
+  transform: translateX(-50%);
 }
 
 /* Efecto al pasar el ratón sobre el botón */
 .fullscreen-btn:hover {
   background-color: #c70039;
-  transform: scale(1.05);
+  /* Eliminar el transform en el hover para evitar el desplazamiento */
 }
 
 /* Contenedor del video dentro del modal */
@@ -161,6 +162,10 @@
     font-size: 0.75rem;
     padding: 0.5rem;
   }
+
+  .modal-media {
+    max-height: 60vh; /* Reduce la altura máxima para pantallas más pequeñas */
+  }
 }
 
 @media (max-width: 576px) {
@@ -179,5 +184,9 @@
   .fullscreen-btn {
     font-size: 0.625rem;
     padding: 0.5rem;
+  }
+
+  .modal-media {
+    max-height: 50vh; /* Reduce aún más la altura máxima para las pantallas más pequeñas */
   }
 }
