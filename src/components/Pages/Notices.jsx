@@ -10,6 +10,7 @@ import {
   get_blog_list_page,
 } from "../../redux/actions/blog/blog";
 import BlogList from "../../containers/notice/BlogList";
+import DynamicHelmetProvider from "../../provider/HelmetProvider";
 
 const Notices = ({
   get_categories,
@@ -29,9 +30,14 @@ const Notices = ({
     fetchData();
   }, [get_categories, get_blog_list]);
 
-  console.log("Posts:", posts);
   return (
     <Layout>
+      <DynamicHelmetProvider
+        title="Noticias y Eventos - IKO Matsushima Chile"
+        description="Encuentra toda la información relevante sobre eventos recientes y novedades de IKO Matsushima Chile. No te pierdas ninguna actualización."
+        keywords="Noticias, Actualizaciones, IKO Matsushima Chile, Novedades, Información"
+      />
+
       <Hero
         title="Noticias y Novedades"
         subtitle="Entérate de las últimas noticias y novedades de IKO Matsushima Chile"

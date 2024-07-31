@@ -2,9 +2,16 @@ import React from "react";
 import Layout from "../Layout/Layout";
 import Hero from "../common/Hero/Hero";
 import HeroImage from "../../assets/img/Hero_Logros.jpg";
+import DynamicHelmetProvider from "../../provider/HelmetProvider";
 const Achievements = () => {
   return (
     <Layout>
+      <DynamicHelmetProvider
+        title="Nuestros Logros y Reconocimientos - IKO Matsushima Chile"
+        description="Descubre los destacados logros y premios de nuestros estudiantes y profesores en IKO Matsushima Chile. Conoce las historias que nos enorgullecen."
+        keywords="Logros, Reconocimientos, IKO Matsushima Chile, Estudiantes, Profesores, Éxitos"
+      />
+
       <Hero
         title="Nuestros logros"
         subtitle="Conoce los logros de nuestros estudiantes y profesores"

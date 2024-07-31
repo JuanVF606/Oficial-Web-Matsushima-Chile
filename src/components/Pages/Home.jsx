@@ -7,25 +7,27 @@ import UpcomingEvents from "../../containers/Home/UpcomingEvents";
 import Achievements from "../../containers/Home/Achievements";
 import ContactAndSocial from "../../containers/Home/ContactAndSocial";
 import Banner from "../common/Banners/Banner";
+import DynamicHelmetProvider from "../../provider/HelmetProvider";
 
 const Home = () => {
   return (
     <Layout>
+      <DynamicHelmetProvider
+        title="Bienvenido a IKO Matsushima Chile"
+        description="Descubre lo mejor del Karate Kyokushin en IKO Matsushima Chile. Explora nuestro dojo, eventos y más."
+        keywords="IKO MATSUSHIMA CHILE, Karate, Kyokushin, IKO Matsushima"
+      />
+
       <Hero />
- 
+
       <Team title={" Conoce a nuestros  Directores de IKO Matsushima Chile"} />
 
       <Achievements />
 
-
       <UpcomingEvents />
 
-
-
-
-
       <LatestNews />
-      <Banner 
+      <Banner
         title="Entrena con nosotros"
         description="¡Busca tu Dojo más cercano y comienza a entrenar con nosotros!"
         href="/nuestros-dojos"

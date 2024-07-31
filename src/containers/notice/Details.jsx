@@ -17,6 +17,7 @@ import { Spinner, Button } from "react-bootstrap";
 import defaultThumbnail from "../../assets/img/Hero_Dojos.jpg";
 import qrimage from "../../assets/img/matsushimachile_qr.png";
 import RelatedPost from "./RelatedPost";
+import DynamicHelmetProvider from "../../provider/HelmetProvider";
 
 const Details = ({ get_blog, post, categories, get_categories }) => {
   const { slug } = useParams();
@@ -52,9 +53,19 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
 
   const categorySlug = post?.category?.slug;
   const currentPostSlug = slug;
+  const shortDescription =
+    post?.description?.length > 100
+      ? post.description.substring(0, 60) + "..."
+      : post.description;
 
   return (
     <Layout>
+      <DynamicHelmetProvider
+        title={`${post.title} - Noticias y Eventos - IKO Matsushima Chile`}
+        description={shortDescription}
+        keywords="Actividades, Eventos, IKO Matsushima Chile"
+      />
+
       <div className="container-Ndetails my-5">
         <div className="row">
           {/* Contenido Principal */}
@@ -118,7 +129,10 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
             </div>
 
             {/* Tarjetas de contenido relacionado */}
-            <RelatedPost categorySlug={categorySlug} currentPostSlug={currentPostSlug} />
+            <RelatedPost
+              categorySlug={categorySlug}
+              currentPostSlug={currentPostSlug}
+            />
           </div>
 
           {/* Sidebar */}
@@ -187,9 +201,10 @@ const Details = ({ get_blog, post, categories, get_categories }) => {
                 <div className="card-body">
                   <h2 className="card-title">Síguenos en Instagram</h2>
                   <p className="text-muted">
-                    Escanea el código QR para seguirnos o haz clic en el botón de abajo
+                    Escanea el código QR para seguirnos o haz clic en el botón
+                    de abajo
                   </p>
-                  
+
                   {/* Insertar imagen de qrimage */}
                   <img src={qrimage} alt="QR Code" className="img-fluid mb-3" />
 

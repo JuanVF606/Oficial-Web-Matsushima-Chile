@@ -19,26 +19,24 @@ const Kyokushin = lazy(() => import("../Pages/Kyokushin.jsx"));
 
 // Define your routes and links in a single array of objects
 const routesAndLinks = [
-  { path: "/", element: <Home />, title: "Bienvenida" },
-  { path: "/quienes-somos", element: <About />, title: "Nosotros" },
+  // Páginas Principales y Más Relevantes para SEO
+  { path: "/", element: <Home />, title: "Inicio" },
+  { path: "/quienes-somos", element: <About />, title: "Quiénes Somos" },
   { path: "/actividades", element: <Events />, title: "Actividades" },
-  {
-    path: "/actividades/categoria/:slug",
-    element: <EventsCategory />,
-    title: null,
-  },
-  { path: "/noticias", element: <Notices />, title: "Noticias y Novedades" },
+  { path: "/noticias", element: <Notices />, title: "Noticias" },
+  { path: "/nuestros-dojos", element: <OurDojos />, title: "Nuestros Dojos" },
+  { path: "/galeria", element: <Galeria />, title: "Galería" },
+  { path: "/kyokushin", element: <Kyokushin />, title: "Kyokushin" },
+
+  // Páginas de Subcategorías y Detalles
+  { path: "/actividades/categoria/:slug", element: <EventsCategory />, title: null },
   { path: "/noticias/:slug", element: <Details />, title: null },
   { path: "/noticias/categoria/:slug", element: <NbyCat />, title: null },
-  { path: "/nuestros-dojos", element: <OurDojos />, title: "Dojos" },
-  {
-    path: "/noticias/logros-y-reconocimiento",
-    element: <Achievements />,
-    title: null,
-  },
-  { path: "/galeria", element: <Galeria />, title: "Galeria" },
-  { path: "/*", element: <ErrorPage />, title: null },
-  { path: "/kyokushin", element: <Kyokushin />, title: "Kyokushin" },
+  { path: "/logros-y-reconocimientos", element: <Achievements />, title: null },
+
+  // Ruta de Error (404)
+  { path: "/*", element: <ErrorPage />, title: null }
 ];
+
 
 export default routesAndLinks;

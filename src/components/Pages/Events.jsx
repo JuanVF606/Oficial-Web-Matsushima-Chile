@@ -10,6 +10,7 @@ import {
   get_actividades_list_page,
 } from "../../redux/actions/actividades/actividades";
 import HeroImage from "../../assets/img/Hero_Actividades.jpg";
+import DynamicHelmetProvider from "../../provider/HelmetProvider.jsx";
 
 const Events = ({
   get_categories,
@@ -36,6 +37,12 @@ const Events = ({
 
   return (
     <Layout>
+      <DynamicHelmetProvider
+        title="Calendario de Actividades - IKO Matsushima Chile"
+        description="Entérate de las últimas actividades y eventos de IKO Matsushima Chile"
+        keywords={"Actividades, Eventos, IKO Matsushima Chile"}
+      />
+
       <Hero
         title={"Revisa nuestras actividades"}
         subtitle="y enterate sobre nuestros examenes de grado, seminarios, torneos y mucho más..."

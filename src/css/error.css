@@ -1,253 +1,118 @@
-
-/* Contenedor Principal */
-
-.notfound {
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
   text-align: center;
-}
-
-.center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Diseño del Error */
-
-.error {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Número del Error */
-
-.number {
-  font-weight: 900;
-  font-size: 10rem; /* Ajustado para que sea visible en diferentes tamaños */
-  line-height: 1;
-  color: #293b49;
+  padding: 20px;
+  background-color: #f5f5f5;
   margin: 0;
+  box-sizing: border-box;
 }
 
-.illustration {
-  position: relative;
-  width: 12.2rem;
-  margin: 1.5rem 0; /* Espacio ajustado para pantallas pequeñas */
-}
-
-/* Círculo */
-
-.circle {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 12.2rem;
-  height: 11.4rem;
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30vw;
+  height: 30vw;
+  max-width: 250px;
+  max-height: 250px;
+  background: linear-gradient(to right, #0033A0 50%, #FFFFFF 50%);
   border-radius: 50%;
-  background-color: #293b49;
+  margin-bottom: 30px;
+  border: 10px solid #D52B1E;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Clip */
-
-.clip {
-  position: absolute;
-  bottom: 0.3rem;
-  left: 50%;
-  transform: translateX(-50%);
-  overflow: hidden;
-  width: 12.5rem;
-  height: 13rem;
-  border-radius: 0 0 50% 50%;
-}
-
-/* Papel */
-
-.paper {
-  position: absolute;
-  bottom: -0.3rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 9.2rem;
-  height: 12.4rem;
-  border: 0.3rem solid #293b49;
-  background-color: white;
-  border-radius: 0.8rem;
-}
-
-.paper::before {
-  content: "";
-  position: absolute;
-  top: -0.7rem;
-  right: -0.7rem;
-  width: 1.4rem;
-  height: 1rem;
-  background-color: white;
-  border-bottom: 0.3rem solid #293b49;
-  transform: rotate(45deg);
-}
-
-/* Carita */
-
-.face {
-  margin-top: 2.3rem;
-}
-
-/* Ojos */
-
-.eyes {
-  position: relative;
-  width: 4.6rem;
-  height: 0.8rem;
-  margin: 0 auto;
-}
-
-.eye {
-  width: 0.8rem;
-  height: 0.8rem;
+.not-found-logo {
+  width: 80%;
+  height: auto;
   border-radius: 50%;
-  background-color: #293b49;
-  animation: eye 4s infinite ease-in-out;
 }
 
-.eye-left {
-  position: absolute;
-  left: 0;
+.not-found-title {
+  font-family: 'Arial', sans-serif;
+  font-size: 6rem;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #D52B1E;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
 }
 
-.eye-right {
-  position: absolute;
-  right: 0;
+.not-found-subtitle {
+  font-family: 'Arial', sans-serif;
+  font-size: 2rem;
+  margin: 10px 0;
+  color: #0033A0;
 }
 
-/* Mejillas Rosadas */
-
-.rosyCheeks {
-  position: absolute;
-  top: 1.6rem;
-  width: 1rem;
-  height: 0.2rem;
-  border-radius: 50%;
-  background-color: #fdabaf;
+.not-found-buttons {
+  margin-top: 30px;
 }
 
-.rosyCheeks-left {
-  left: 1.4rem;
-}
-
-.rosyCheeks-right {
-  right: 1.4rem;
-}
-
-/* Boca */
-
-.mouth {
-  position: absolute;
-  top: 3.1rem;
-  left: 50%;
-  width: 1.6rem;
-  height: 0.2rem;
-  border-radius: 0.1rem;
-  background-color: #293b49;
-  transform: translateX(-50%);
-}
-
-/* Texto y Botón */
-
-.text {
-  margin-top: 5rem;
-  font-weight: 300;
-  color: #293b49;
-}
-
-.button {
-  margin-top: 4rem;
-  padding: 1.2rem 3rem;
-  color: white;
-  background-color: #04cba0;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 1.4rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.button:hover {
-  background-color: #01ac88;
-}
-
-/* Pie de Página */
-
-.by {
-  margin-top: 3rem;
-  font-size: 1.2rem;
-  color: #293b49;
-}
-
-.byLink {
-  color: #04cba0;
+.not-found-button {
+  display: inline-block;
+  margin: 10px;
+  padding: 15px 30px;
+  font-size: 1.25rem;
+  color: #fff;
+  background-color: #D52B1E;
   text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.byLink:hover {
-  text-decoration: underline;
+.not-found-button:hover {
+  background-color: #a20c0d;
+  transform: scale(1.05);
 }
 
-/* Animaciones */
-
-@keyframes eye {
-  0%, 100% {
-    height: 0.8rem;
-  }
-  50% {
-    height: 0.1rem;
-  }
+.not-found-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
 }
 
 /* Responsividad */
-
 @media (max-width: 768px) {
-  .number {
-    font-size: 8rem; /* Tamaño del número en pantallas más pequeñas */
+  .not-found-title {
+    font-size: 4rem;
   }
 
-  .illustration {
-    width: 10rem;
-    margin: 1rem 0;
+  .not-found-subtitle {
+    font-size: 1.5rem;
   }
 
-  .button {
-    padding: 1rem 2.5rem;
-    font-size: 1.2rem;
+  .logo-container {
+    width: 40vw;
+    height: 40vw;
   }
 
-  .by {
+  .not-found-button {
     font-size: 1rem;
+    padding: 10px 20px;
   }
 }
 
 @media (max-width: 480px) {
-  .number {
-    font-size: 6rem; /* Tamaño del número en pantallas muy pequeñas */
+  .not-found-title {
+    font-size: 3rem;
   }
 
-  .illustration {
-    width: 8rem;
-    margin: 0.5rem 0;
+  .not-found-subtitle {
+    font-size: 1.25rem;
   }
 
-  .button {
-    padding: 0.8rem 2rem;
-    font-size: 1rem;
+  .logo-container {
+    width: 50vw;
+    height: 50vw;
   }
 
-  .text {
-    font-size: 1.4rem; /* Tamaño del texto en pantallas pequeñas */
-    margin-top: 4rem;
-  }
-
-  .by {
-    font-size: 0.9rem;
+  .not-found-button {
+    font-size: 0.875rem;
+    padding: 8px 16px;
   }
 }

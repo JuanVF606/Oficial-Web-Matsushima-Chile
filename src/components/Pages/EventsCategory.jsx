@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Layout from "../Layout/Layout";
 import Hero from "../common/Hero/Hero";
 import Categories from "../../containers/events/Categories";
@@ -11,6 +11,7 @@ import {
 } from "../../redux/actions/actividades/actividades";
 import { useParams } from "react-router-dom";
 import Activities from "../../containers/events/Activities";
+import DynamicHelmetProvider from "../../provider/HelmetProvider";
 const EventsCategory = ({
   get_categories,
   categories,
@@ -21,7 +22,6 @@ const EventsCategory = ({
   next,
   previous,
 }) => {
-
   const { slug } = useParams();
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +41,11 @@ const EventsCategory = ({
 
   return (
     <Layout>
+      <DynamicHelmetProvider
+        title={`${slug} - Calendario de Actividades - IKO Matsushima Chile`}
+        description={`No te pierdas los próximos eventos y actividades sobre ${slug} organizados por IKO Matsushima Chile.`} 
+        keywords={"Actividades, Eventos, IKO Matsushima Chile"}
+      />
       <Hero
         title={"Revisa nuestras actividades"}
         subtitle="y enterate sobre nuestros examenes de grado, seminarios, torneos y mucho más..."
@@ -53,10 +58,11 @@ const EventsCategory = ({
           post={posts && posts}
           count={count}
           get_activities_by_page={
-            get_actividades_list_category_page && get_actividades_list_category_page
+            get_actividades_list_category_page &&
+            get_actividades_list_category_page
           }
         />
-  </div>
+      </div>
     </Layout>
   );
 };

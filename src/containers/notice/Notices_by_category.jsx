@@ -11,6 +11,7 @@ import {
 } from "../../redux/actions/blog/blog";
 import BlogList from "../../containers/notice/BlogList";
 import { useParams } from "react-router-dom";
+import DynamicHelmetProvider from "../../provider/HelmetProvider";
 
 const Notices = ({
   get_categories,
@@ -43,6 +44,8 @@ const Notices = ({
   };
   return (
     <Layout>
+      <DynamicHelmetProvider title={`${slug} - Noticias y Actividades Recientes - IKO Matsushima Chile`} description={`Descubre todas las Actividades de ${slug} que tenemos preparados para ti`} keywords={"Actividades, Eventos, IKO Matsushima Chile"} />
+
       <Hero
         title="Noticias y Novedades"
         subtitle="Entérate de las últimas noticias y novedades de IKO Matsushima Chile"
