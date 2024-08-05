@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 // src/components/Notices.js
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Layout from "../../components/Layout/Layout";
 import Hero from "../../components/common/Hero/Hero";
 import Hero_notice from "../../assets/img/Hero_notice.jpg";
@@ -13,39 +14,42 @@ import BlogList from "../../containers/notice/BlogList";
 import { useParams } from "react-router-dom";
 import DynamicHelmetProvider from "../../provider/HelmetProvider";
 
-const Notices = ({
-  get_categories,
-  categories,
-  get_blog_list_category,
-  get_blog_list_category_page,
-  posts,
-  count,
-  next,
-  previous,
-}) => {
+const Notices = () => {
+  const dispatch = useDispatch();
   const params = useParams();
   const slug = params.slug;
+
+  const categories = useSelector((state) => state.categories.categories);
+  const posts = useSelector((state) => state.blog.blog_list_category);
+  const count = useSelector((state) => state.blog.blog_count);
+  const next = useSelector((state) => state.blog.blog_next);
+  const previous = useSelector((state) => state.blog.blog_previous);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await get_categories();
-        await get_blog_list_category(slug);
+        await dispatch(get_categories());
+        await dispatch(get_blog_list_category(slug));
       } catch (error) {
         // Manejar el error estableciendo el estado de error
       }
     };
 
     fetchData();
-  }, [get_categories, slug, get_blog_list_category]);
+  }, [dispatch, slug]);
+
   const handlePageChange = (page) => {
     // Llamar a la acción para obtener la siguiente página de blogs de la categoría
-    get_blog_list_category_page(slug, page);
+    dispatch(get_blog_list_category_page(slug, page));
   };
+
   return (
     <Layout>
-      <DynamicHelmetProvider title={`${slug} - Noticias y Actividades Recientes - IKO Matsushima Chile`} description={`Descubre todas las Actividades de ${slug} que tenemos preparados para ti`} keywords={"Actividades, Eventos, IKO Matsushima Chile"} />
-
+      <DynamicHelmetProvider 
+        title={`${slug} - Noticias y Actividades Recientes - IKO Matsushima Chile`} 
+        description={`Descubre todas las Actividades de ${slug} que tenemos preparados para ti`} 
+        keywords={"Actividades, Eventos, IKO Matsushima Chile"} 
+      />
       <Hero
         title="Noticias y Novedades"
         subtitle="Entérate de las últimas noticias y novedades de IKO Matsushima Chile"
@@ -53,27 +57,14 @@ const Notices = ({
       />
       <section className="notices-section">
         <BlogList
-          categories={categories && categories}
-          post={posts && posts}
-          get_blog_list_page={handlePageChange && handlePageChange}
-          count={count && count}
+          categories={categories}
+          post={posts}
+          get_blog_list_page={handlePageChange}
+          count={count}
         />
       </section>
     </Layout>
   );
 };
 
-const mapStateToProps = (state) => ({
-  categories: state.categories.categories,
-  posts: state.blog.blog_list_category,
-  count: state.blog.blog_count,
-  next: state.blog.blog_next,
-  previous: state.blog.blog_previous,
-});
-
-export default connect(mapStateToProps, {
-  // actions here
-  get_categories,
-  get_blog_list_category,
-  get_blog_list_category_page,
-})(Notices);
+export default Notices;

@@ -1,4 +1,10 @@
 /* Hero.css */
+.hero {
+  transition: background-image 1s ease-in-out, opacity 1s ease-in-out;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Efecto parallax */
+}
 
 /* Estilo de los botones del Hero */
 .btn-about {

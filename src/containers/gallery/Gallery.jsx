@@ -81,7 +81,7 @@ const Gallery = () => {
   };
 
   const truncateDescription = (description) => {
-    if (!description) return '';
+    if (!description) return "";
     return description.length > 30
       ? description.slice(0, 30) + "..."
       : description;

@@ -1,6 +1,6 @@
-// src/components/Notices.js
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "../Layout/Layout";
 import Hero from "../common/Hero/Hero";
 import Hero_notice from "../../assets/img/Hero_notice.jpg";
@@ -12,23 +12,21 @@ import {
 import BlogList from "../../containers/notice/BlogList";
 import DynamicHelmetProvider from "../../provider/HelmetProvider";
 
-const Notices = ({
-  get_categories,
-  categories,
-  get_blog_list,
-  get_blog_list_page,
-  posts,
-  count,
-  next,
-  previous,
-}) => {
+const Notices = () => {
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories.categories);
+  const posts = useSelector((state) => state.blog.blog_list);
+  const count = useSelector((state) => state.blog.count);
+  const next = useSelector((state) => state.blog.next);
+  const previous = useSelector((state) => state.blog.previous);
+
   useEffect(() => {
     const fetchData = async () => {
-      await get_categories();
-      await get_blog_list();
+      await dispatch(get_categories());
+      await dispatch(get_blog_list());
     };
     fetchData();
-  }, [get_categories, get_blog_list]);
+  }, [dispatch]);
 
   return (
     <Layout>
@@ -45,27 +43,14 @@ const Notices = ({
       />
       <section className="notices-section">
         <BlogList
-          post={posts && posts}
-          get_blog_list_page={get_blog_list_page && get_blog_list_page}
-          count={count && count}
-          categories={categories && categories}
+          post={posts}
+          get_blog_list_page={get_blog_list_page}
+          count={count}
+          categories={categories}
         />
       </section>
     </Layout>
   );
 };
 
-const mapStateToProps = (state) => ({
-  categories: state.categories.categories,
-  posts: state.blog.blog_list,
-  count: state.blog.count,
-  next: state.blog.next,
-  previous: state.blog.previous,
-});
-
-export default connect(mapStateToProps, {
-  // actions here
-  get_categories,
-  get_blog_list,
-  get_blog_list_page,
-})(Notices);
+export default Notices;

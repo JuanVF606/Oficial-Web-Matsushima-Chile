@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import heroImage from '../../assets/img/Hero.jpg';  // Asegúrate de agregar una imagen de fondo en la carpeta de assets
+import heroImage1 from '../../assets/img/Pictures-Home/fondo.webp';  // Imágenes de fondo
+import heroImage2 from '../../assets/img/Pictures-Home/fondo1.webp';
+import heroImage3 from '../../assets/img/Pictures-Home/fondo2.webp';
+
+const images = [heroImage1, heroImage2, heroImage3]; // Array con imágenes
 
 const Hero = () => {
+  const [currentImage, setCurrentImage] = useState(images[0]); // Estado para la imagen actual
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prevImage) => {
+        const currentIndex = images.indexOf(prevImage);
+        const nextIndex = (currentIndex + 1) % images.length; // Cambia al siguiente índice
+        return images[nextIndex];
+      });
+    }, 5000); // Cambia cada 5 segundos
+
+    return () => clearInterval(interval); // Limpia el intervalo cuando el componente se desmonte
+  }, []);
+
   return (
     <section 
       className="hero d-flex flex-column justify-content-center align-items-center position-relative overflow-hidden text-white" 
       style={{ 
-        backgroundImage: `url(${heroImage})`, 
+        backgroundImage: `url(${currentImage})`, 
         backgroundSize: 'cover', 
         backgroundPosition: 'center', 
         minHeight: '70vh',
@@ -26,7 +44,6 @@ const Hero = () => {
             >
               Entrena con Nosotros
             </Link>
-           
           </div>
         </div>
         <div className="container text-center mt-4 mt-md-5">

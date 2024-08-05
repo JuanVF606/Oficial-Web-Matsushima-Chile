@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Layout from "../Layout/Layout";
-import { connect } from "react-redux";
 import Hero from "../common/Hero/Hero.jsx";
 import Categories from "./../../containers/events/Categories";
 import Activities from "../../containers/events/Activities.jsx";
@@ -12,28 +13,26 @@ import {
 import HeroImage from "../../assets/img/Hero_Actividades.jpg";
 import DynamicHelmetProvider from "../../provider/HelmetProvider.jsx";
 
-const Events = ({
-  get_categories,
-  get_actividades_list_page,
-  get_actividades_list,
-  actividades,
-  categories,
-  posts,
-  count,
-  next,
-  previous,
-}) => {
+const Events = () => {
+  const dispatch = useDispatch();
+
+  const categories = useSelector((state) => state.categories.categories);
+  const posts = useSelector((state) => state.actividades.activity_list);
+  const count = useSelector((state) => state.actividades.count);
+  const next = useSelector((state) => state.actividades.next);
+  const previous = useSelector((state) => state.actividades.previous);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await get_categories();
-        await get_actividades_list();
+        await dispatch(get_categories());
+        await dispatch(get_actividades_list());
       } catch (error) {
-        <div>Info: {"No existen Actividades"}</div>;
+        console.error("Error fetching data:", error);
       }
     };
     fetchData();
-  }, [get_categories, get_actividades_list]);
+  }, [dispatch]);
 
   return (
     <Layout>
@@ -50,30 +49,16 @@ const Events = ({
       />
 
       <div className="mt-5 bg-light">
-        <Categories categories={categories && categories} />
+        <Categories categories={categories} />
         <Activities
-          categories={categories && categories}
-          get_actividades_list_page={
-            get_actividades_list_page && get_actividades_list_page
-          }
-          post={posts && posts}
-          count={count && count}
+          categories={categories}
+          get_actividades_list_page={get_actividades_list_page}
+          posts={posts}
+          count={count}
         />
       </div>
     </Layout>
   );
 };
 
-const mapStateToProps = (state) => ({
-  categories: state.categories.categories,
-  posts: state.actividades.activity_list,
-  count: state.actividades.count,
-  next: state.actividades.next,
-  previous: state.actividades.previous,
-});
-
-export default connect(mapStateToProps, {
-  get_categories,
-  get_actividades_list,
-  get_actividades_list_page,
-})(Events);
+export default Events;

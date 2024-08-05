@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { get_dojos } from "../../redux/actions/dojos/dojos";
 import {
   MapIcon,
@@ -7,6 +7,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import UserDefault from "../../assets/img/logo.jpg";
+
 const DojoCard = ({ dojo }) => (
   <div className="col-12 col-md-6 col-lg-4 mb-4">
     <div className="card h-100 shadow-sm dojo-card">
@@ -84,10 +85,13 @@ const RegionSection = ({ region, dojos }) => (
   </div>
 );
 
-const Dojos = ({ get_dojos, dojosData }) => {
+const Dojos = () => {
+  const dispatch = useDispatch();
+  const dojosData = useSelector((state) => state.dojos);
+
   useEffect(() => {
-    get_dojos();
-  }, [get_dojos]);
+    dispatch(get_dojos());
+  }, [dispatch]);
 
   if (dojosData.loading) {
     return (
@@ -128,12 +132,4 @@ const Dojos = ({ get_dojos, dojosData }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  dojosData: state.dojos,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  get_dojos: () => dispatch(get_dojos()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dojos);
+export default Dojos;
