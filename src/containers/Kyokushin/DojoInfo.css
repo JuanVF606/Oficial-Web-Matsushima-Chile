@@ -88,8 +88,8 @@
 
 .dojo-rules {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 6fr));
+  gap: 20px;
 }
 
 .dojo-rule {
@@ -105,17 +105,21 @@
 }
 
 .dojo-rule-image {
-  width: 100%;
+  width: 90%;
+  align-items: center;
   height: auto; /* Mantiene la proporción de la imagen */
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 15px;
 }
 
 .dojo-rule-text {
-  margin: 0;
+  margin: auto;
   font-size: 1rem;
   color: #555;
   line-height: 1.5;
+  text-align: center;
+  font: inherit;
+
 }
 
 /* Media Queries */
