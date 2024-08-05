@@ -11,6 +11,7 @@ const DojoInfo = () => {
     <div className="dojo-info-container">
       <div className="dojo-info-layout">
         <DojoKun />
+
         <DojoRules />
       </div>
     </div>

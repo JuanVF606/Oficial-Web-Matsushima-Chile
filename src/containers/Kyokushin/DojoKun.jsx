@@ -56,12 +56,12 @@ const DojoKun = () => {
           {/* Video Section */}
           <div
             className="video-section"
-            style={{ marginTop: "20px", textAlign: "center" }}
+            style={{ marginTop: "20px", textAlign: "center", padding: "10px" }}
           >
             <h4 className="text-center">Video de Dojo Kun</h4>
             <iframe
               width="560"
-              style={{ border: "2px solid red" }}
+              style={{ border: "2px solid red", maxWidth: "100%", height: "auto" }}
               height="315"
               src="https://www.youtube.com/embed/z7CPSCa8FiY"
               title="Kyokushin Karate Dojo Kun"
@@ -70,6 +70,8 @@ const DojoKun = () => {
               referrerPolicy="strict-origin-when-cross-origin"
               caption="Kyokushin Karate Dojo Kun"
               allowFullScreen
+              lang="es"
+              
             ></iframe>
           </div>
         </div>
